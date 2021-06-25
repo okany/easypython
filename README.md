@@ -1,0 +1,2 @@
+# easypython
+Simple python scripts
