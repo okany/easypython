@@ -1,10 +1,9 @@
 # easypython
 
 ## Simple python scripts
-## =====================
 
-* test1 - finds the kth minimum of a list
-* test2 - finds the kth minimum number in a list
+* test1 - finds the kth minimum number in a list
+* test2 - finds the kth minimum number in a list (another version)
 * test3 - manipulates a number string by adding a "*" between two consecutive even numbers and "-" between two consecutive odd numbers
 * test4 - mingles two strings after crerating chunks in size n e.g. ABCDEFG and 1234567890 with 2 char chunks -> AB12CD34EF56G7890
 * test5 - finds the common words in two lists
