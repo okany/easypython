@@ -22,3 +22,4 @@
 * test18 - creates a list with only unique items
 * test19 - finds all combinations of a string
 * test20 - check if a string is a palindrome
+* test21 - reverses a singly linked list

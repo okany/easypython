@@ -1,22 +1,29 @@
 # this script finds the nth node from the end in a singly linked list
 
-class mylist():
-    def __init__(self, alist):
-        self.next = None
-        self.data = None
-        if (alist != None and alist != []):
-            # create an object with no valid atrribute if the list is None or empty
-            self.data = alist[0]
-            self.next = None
-            if(len(alist) > 1):
-                self.next = mylist(alist[1:])
+def createlinkedlist(alist):
+    if(alist == None or alist == []):
+        return None
+    else:
+        llist = linkedlist(alist[0])
+        llist.setnext(createlinkedlist(alist[1:]))
+        return llist
 
+class linkedlist():
+    def __init__(self, data):
+        self.next = None
+        self.data = data
+
+    def setnext(self, next):
+        self.next = next
+
+    def setdata(self, data):
+        self.data = data
+        
     def tolist(self):
         alist = []
         trv = self
         while trv != None:
-            if(trv.data != None):
-                alist.append(trv.data)
+            alist.append(trv.data)
             trv = trv.next
 
         return alist
@@ -41,23 +48,23 @@ class mylist():
         return(numlist[0])
 
 if __name__ == '__main__':
-    ml = mylist(["a","s","d","a","s","d","a","s","f","d","s","g","g","d","f","g","d","f","f","g","h","j","f","g","h","j","g","h","j"])
+    ml = createlinkedlist(["a","s","d","a","s","d","a","s","f","d","s","g","g","d","f","g","d","f","f","g","h","j","f","g","h","j","g","h","j"])
     nth = 9
     print("{}th item from the end of list {} is {}".format(nth, ml.tolist(), ml.enditem(nth)))
 
-    ml = mylist(["a","s","d","a","s","d","a","s","f","g","h","j","g","h","j"])
+    ml = createlinkedlist(["a","s","d","a","s","d","a","s","f","g","h","j","g","h","j"])
     nth = 6
     print("{}th item from the end of list {} is {}".format(nth, ml.tolist(), ml.enditem(nth)))
 
-    ml = mylist([])
+    ml = createlinkedlist([])
     nth = 6
-    print("{}th item from the end of list {} is {}".format(nth, ml.tolist(), ml.enditem(nth)))
+    print("{}th item from the end of list {} is {}".format(nth, ml, ml))
 
-    ml = mylist([1])
+    ml = createlinkedlist([1])
     nth = 1
     print("{}st item from the end of list {} is {}".format(nth, ml.tolist(), ml.enditem(nth)))
 
-    ml = mylist(["a","s","d","a","s","d","a","s","f","g","h","j","g","h","j"])
+    ml = createlinkedlist(["a","s","d","a","s","d","a","s","f","g","h","j","g","h","j"])
     nth = 0
     print("{}th item from the end of list {} is {}".format(nth, ml.tolist(), ml.enditem(nth)))
 
