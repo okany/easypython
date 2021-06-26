@@ -1,24 +1,25 @@
 # This script manipulates a number string by
 # adding a "*" between two consecutive even numbers and "-" between two consecutive odd numbers
 
-class strmanup():
+class strmanup(str):
     def __init__(self, astr):
-        self.astr = astr
         self.offset = 0
+        super().__init__()
+        self = astr
 
     def isEven(self, i):
-        return((int(self.astr[i]) % 2) == 0)
+        return((int(self[i]) % 2) == 0)
 
     def isOdd(self, i):
-        return((int(self.astr[i]) % 2) != 0)
+        return((int(self[i]) % 2) != 0)
 
     def manupstr(self, offset):
         newstr = ""
-        if(len(self.astr)<offset):
-            return self.astr
+        if(len(self)<offset):
+            return self
 
-        for i in range(len(self.astr)-offset+1):
-            newstr = newstr + self.astr[i]
+        for i in range(len(self)-offset+1):
+            newstr = newstr + self[i]
             if (self.isEven(i) and self.isEven(i+1)):
                 newstr = newstr + "*"
             elif (self.isOdd(i) and self.isOdd(i+1)):

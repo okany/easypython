@@ -1,15 +1,15 @@
 # This script demonstrates trying and catching exceptions while getting an a positive integer as an input
 # and printing its square
 
-class square():
+class square(int):
     def __init__(self, num):
-        self.num = num
+        self = num
 
     def getnum(self):
-        return self.num
+        return self
 
     def getsqr(self):
-        return (self.num * self.num)
+        return (self * self)
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':

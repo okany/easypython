@@ -1,14 +1,13 @@
 # Find the kth minimum number in a list
-import sys
 
-class datalist:
+class datalist(list):
     def __init__(self, list):
-        self.mylist = list
         self.k = 0
         self.klist = []
+        super().__init__(list)
 
     def printlist(self):
-        print("DATALIST =", self.mylist)
+        print("DATALIST =", self)
 
     def insertklist(self, newitem):
         if(len(self.klist) == self.k and self.klist[self.k-1]<newitem):
@@ -27,10 +26,10 @@ class datalist:
     def printkmin(self, k):
         self.k = k
         if len(self.klist)>0: self.klist.clear()
-        if(len(self.mylist) < self.k):
+        if(len(self) < self.k):
             return None
         else:
-            for item in self.mylist:
+            for item in self:
                 self.insertklist(item)
             return self.klist[self.k-1]
 

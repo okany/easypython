@@ -19,3 +19,5 @@ test13 - reverses words in a paragraph
 test14 - removes duplicate entries in a list
 test15 - checks if 2 strings are rotation of each other
 test16 - reverse words in a given sentence without using any library method
+test17 - finds the nth node from the end in a singly linked list
+test18 - creates a list with only unique items

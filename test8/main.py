@@ -1,13 +1,13 @@
 # Find duplicate characters in a string
 
-class stringdups():
+class stringdups(str):
     def __init__(self, astr):
-        self.str = astr
         self.strdict = dict()
         self.strdups = []
+        self = astr
 
     def finddups(self):
-        for char in self.str:
+        for char in self:
             if self.strdict.get(char) == None:
                 self.strdict[char] = 1
             else:

@@ -1,14 +1,14 @@
 # How do you print the first non-repeated character from a string?
 
-class firstnrep():
+class firstnrep(str):
     def __init__(self, astr):
-        self.str = astr
         self.set = set()
         self.first = ""
+        self = astr
 
     def firstnon(self):
         self.first = ""
-        for char in self.str[::-1]:
+        for char in self[::-1]:
             if char not in self.set:
                 self.set.add(char)
                 self.first = char

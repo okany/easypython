@@ -1,31 +1,31 @@
 # This script removes duplicate entries in a list
 
-class uniquelist():
+class uniquelist(list):
     def __init__(self, alist):
-        self.alist = alist
+        super().__init__(alist)
         self.set = set()
+        self.rlist = []
 
     def dedup(self):
-        blist = []
-        for i in range(len(self.alist)):
-            item = self.alist[i]
+        self.rlist = []
+        for i in range(len(self)):
+            item = self[i]
             if item not in self.set:
                 self.set.add(item)
-                blist.append(item)
-        self.alist = blist
-        return (self.alist)
+                self.rlist.append(item)
+        return (self.rlist)
 
     def dedup2(self):
-        blist = []
-        i = len(self.alist) - 1
+        self.rlist = self
+        i = len(self.rlist) - 1
         while i > 0:
-            item = self.alist[i]
+            item = self.rlist[i]
             if(item not in self.set):
                 self.set.add(item)
             else:
-                self.alist.pop(i)
+                self.rlist.pop(i)
             i = i - 1
-        return(self.alist)
+        return(self.rlist)
 
 if __name__ == "__main__":
     str1 = "Keto looks so good on paper and the results from it are amazing, but why is it such a challenge for me? Am I forever doomed to fail at it? Part of me thought yes, but deep down I knew that if I had the right tools and training wheels, I could make it happen. As I chomped my fourth Oreo I Googled *how to be successful at Keto*."
