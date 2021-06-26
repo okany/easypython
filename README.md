@@ -1,6 +1,6 @@
-# easypython
+## easypython
 
-## Simple python scripts
+### Simple python scripts
 
 * test1 - finds the kth minimum number in a list
 * test2 - finds the kth minimum number in a list (another version)
