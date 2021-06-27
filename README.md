@@ -24,3 +24,4 @@
 * test20 - check if a string is a palindrome
 * test21 - reverses a singly linked list
 * test22 - implements a binary tree
+* test23 - implements preorder, inorder, and postorder traversal of a binary tree with and without using recursion 
