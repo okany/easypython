@@ -25,3 +25,4 @@
 * test21 - reverses a singly linked list
 * test22 - implements a binary tree
 * test23 - implements preorder, inorder, and postorder traversal of a binary tree with and without using recursion 
+* test24 - finds the middle node in a linked list in one pass
