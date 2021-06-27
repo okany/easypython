@@ -11,6 +11,19 @@ def createlinkedlist(alist):
         trv = trv.next
     return llist
 
+def rec_reverse(ll):
+
+    rev = head = None
+    if ll == None: pass
+    elif ll.next == None:
+        rev =  head = linkedlist(ll.data)
+    else:
+        rev, head = rec_reverse(ll.next)
+        rev.next = linkedlist(ll.data)
+        rev = rev.next
+
+    return rev, head
+
 class linkedlist():
     def __init__(self, data):
         self.data = data
@@ -48,10 +61,13 @@ class linkedlist():
 
 if __name__ == "__main__":
 
-    ml = createlinkedlist(
-        ["a", "s", "d", "a", "s", "d", "a", "s", "f", "d", "s", "g", "g", "d", "f", "g", "d", "f", "f", "g", "h", "j",
-         "f", "g", "h", "j", "g", "h", "j"])
-    print("reverse of list {} is {}".format(ml.tolist(), ml.reverse().tolist()))
+    alist = ["a", "s", "d", "a", "s", "d", "a", "s", "f", "d", "s", "g", "g", "d", "f", "g", "d", "f", "f", "g", "h", "j",
+         "f", "g", "h", "j", "g", "h", "j"]
+    ml = createlinkedlist(alist)
+
+    print("reverse of list           {} is {}".format(ml.tolist(), ml.reverse().tolist()))
+    rev, head = rec_reverse(ml)
+    print("recursive reverse of list {} is {}".format(alist, head.tolist()))
 
     ml = createlinkedlist(["a", "s", "d", "a", "s", "d", "a", "s", "f", "g", "h", "j", "g", "h", "j"])
     print("reverse of list {} is {}".format(ml.tolist(), ml.reverse().tolist()))
