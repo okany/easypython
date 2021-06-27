@@ -23,3 +23,4 @@
 * test19 - finds all combinations of a string
 * test20 - check if a string is a palindrome
 * test21 - reverses a singly linked list
+* test22 - implements a binary tree
