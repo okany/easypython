@@ -27,3 +27,4 @@
 * test23 - implements preorder, inorder, and postorder traversal of a binary tree with and without using recursion 
 * test24 - finds the middle node in a linked list in one pass
 * test25 - prints all leaves of a binary tree
+* test26 - implements bubble sort, insertion sort, quick sort, merge sort, and bucket sort algorithms
