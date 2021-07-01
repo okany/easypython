@@ -28,4 +28,5 @@
 * test24 - finds the middle node in a linked list in one pass
 * test25 - prints all leaves of a binary tree
 * test26 - implements bubble sort, insertion sort, quick sort, merge sort, and bucket sort algorithms
-8 test27 - implements a simple vending machine
+* test27 - implements a simple vending machine
+* test28 - finds least common ancesstor in a binary search tree
