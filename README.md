@@ -29,4 +29,5 @@
 * test25 - prints all leaves of a binary tree
 * test26 - implements bubble sort, insertion sort, quick sort, merge sort, and bucket sort algorithms
 * test27 - implements a simple vending machine
-* test28 - finds least common ancesstor in a binary search tree
+* test28 - finds the least common ancesstor in a binary search tree
+* test29 - finds the maximum depth of a binary tree
