@@ -33,3 +33,4 @@
 * test29 - finds the maximum depth of a binary tree
 * test30 - creates a binary tree iterator
 * test31 - recovers a binary search tree with 2 replaced nodes
+* test32 - finds list of all unique triplets in a list of integers satisfying a+b+c=0 in non-descending order
