@@ -32,3 +32,4 @@
 * test28 - finds the least common ancesstor in a binary search tree
 * test29 - finds the maximum depth of a binary tree
 * test30 - creates a binary tree iterator
+* test31 - recovers a binary search tree with 2 replaced nodes
