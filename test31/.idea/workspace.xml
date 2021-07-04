@@ -1,7 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8aaf742a-e9f2-4af3-a95d-19476f7122fe" name="Default Changelist" comment="" />
+    <list default="true" id="8aaf742a-e9f2-4af3-a95d-19476f7122fe" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../main32/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../main32/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test1/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test1/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test10/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test10/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test11/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test11/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test12/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test12/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test13/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test13/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test14/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test14/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test15/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test15/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test16/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test16/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test17/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test17/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test18/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test18/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test19/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test19/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test2/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test2/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test20/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test20/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test21/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test21/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test22/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test22/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test23/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test23/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test24/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test24/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test25/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test25/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test26/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test26/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test27/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test27/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test28/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test28/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test29/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test29/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test3/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test3/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test30/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../test30/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test30/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test30/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test4/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test4/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test5/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test5/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test6/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test6/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test7/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test7/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test8/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test8/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../test9/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../test9/main.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,6 +54,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
   </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
@@ -59,7 +95,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>2</line>
+          <line>21</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
