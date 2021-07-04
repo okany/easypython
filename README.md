@@ -34,3 +34,4 @@
 * test30 - creates a binary tree iterator
 * test31 - recovers a binary search tree with 2 replaced nodes
 * test32 - finds list of all unique triplets in a list of integers satisfying a+b+c=0 in non-descending order
+* test33 - reads a text file and creates another text file with the reversed file content
