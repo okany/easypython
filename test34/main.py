@@ -20,64 +20,57 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
+import sys
+
 class subsinstring():
     def __init__(self, astr, sublist):
         self.str = astr
         self.sublist = sublist
-        self.slist = []
+        self.subset = set()
+        self.subdict = dict()
 
         if(len(sublist) == 0):
             raise ValueError
         self.sublen = len(sublist[0])
         for each in sublist:
-            if(len(each) != self.sublen):
+            if(len(each) != self.sublen) or each in self.subset:
                 raise ValueError
-            aset = set()
-            # create a dictionary for each substring
-            self.slist.append(aset)
+            else:
+                self.subset.add(each)
+
             part = str(self.str)
-            offset = 0
-            ind = 0
+            offset = ind = 0
             while ind >=0 and part and part != "":
                 ind = part.find(each)
                 if(ind >= 0):
                     offset = offset+ind
                     # print("found {} in {} at position {}".format(each, self.str, offset))
-                    aset.add(offset)
+                    self.subdict[offset] = each
                     offset = offset+1
                     part = str(part[ind+1:])
-
-    def check_subs(self, used, index):
-        if(len(used) == len(self.slist)):
-            return True, used
-        for i in range(len(self.slist)):
-            if i not in used and index in self.slist[i]:
-                # this is a possible solution so append i to used list and check the next index
-                used.append(i)
-                found, sol = self.check_subs(used, index+self.sublen)
-                if(found):
-                    return True, sol
-        return False, []
+        # print("subset = {}".format(self.subset))
 
     def find_subcombs(self):
-        #make sure that all substrings are found in the string
-        for i in range(len(self.slist)):
-            if len(self.slist[i]) == 0:
-                print("substring {} does not exist in {}".format(self.sublist[i], self.str))
-                return False
 
         # keep the solutions in matchlist object in [stating index, substring order] format
         matchlist = []
         # check if you can find a substring of combination of all substrings in the string
-        for i in range(len(self.slist)):
-            for index in self.slist[i]:
+        for index in range(len(self.str)):
+            subindex = index
+            used = set()
+            while subindex < len(self.str):
+                substr = self.subdict.get(subindex)
+                if substr and substr not in used:
+                    used.add(substr)
+                    subindex += self.sublen
+                else:
+                    # no match, so try next index
+                    break
+            # length match indicates that all substrs are used
+            if len(used) == len(self.sublist):
+                #print ("found a string starting at {}".format(index))
+                matchlist.append(index)
 
-                # starting from match index of sublist i
-                used = [i]
-                found, sol = self.check_subs(used, index+self.sublen)
-                if found:
-                    print ("found a string starting at {}".format(index))
-                    matchlist.append(index)
         return matchlist
 
 if __name__ == "__main__":
@@ -87,11 +80,12 @@ if __name__ == "__main__":
         sublist = ["foo", "bar", "man"]
         sis = subsinstring("barfoothefoobarmanbarfoo", sublist)
         matchlist = sis.find_subcombs()
+        print("searching substrings {} in {}".format(sublist, sis.str))
         print("sublist is {}".format(matchlist))
     except ValueError:
         print ("Value Error is received")
     except:
-        print ("Unknown error is received")
+        print ("Unknown error is received {}".format(sys.exec_info()))
 
     print("\n\nTEST#2")
 
@@ -99,11 +93,12 @@ if __name__ == "__main__":
         sublist = ["foo", "bar", "man", "ball"]
         sis = subsinstring("barfoothefoobarmanbarfoo", sublist)
         matchlist = sis.find_subcombs()
+        print("searching substrings {} in {}".format(sublist, sis.str))
         print("sublist is {}".format(matchlist))
     except ValueError:
         print("Value Error is received")
     except:
-        print("Unknown error is received")
+        print ("Unknown error is received {}".format(sys.exec_info()))
 
     print("\n\nTEST#3")
 
@@ -111,11 +106,12 @@ if __name__ == "__main__":
         sublist = ["foo", "bar", "man", "bal"]
         sis = subsinstring("barfoothefoobarmanbarfoo", sublist)
         matchlist = sis.find_subcombs()
+        print("searching substrings {} in {}".format(sublist, sis.str))
         print("sublist is {}".format(matchlist))
     except ValueError:
         print("Value Error is received")
     except:
-        print("Unknown error is received")
+        print ("Unknown error is received {}".format(sys.exec_info()))
 
     print("\n\nTEST#4")
 
@@ -123,11 +119,26 @@ if __name__ == "__main__":
         sublist = ["foo", "bar", "man", "bal", "tal", "sol"]
         sis = subsinstring("barfoothefoobarmanbarfoobaltalbarsolman", sublist)
         matchlist = sis.find_subcombs()
+        print("searching substrings {} in {}".format(sublist, sis.str))
         print("sublist is {}".format(matchlist))
     except ValueError:
         print("Value Error is received")
     except:
-        print("Unknown error is received")
+        print ("Unknown error is received {}".format(sys.exec_info()))
+
+    print("\n\nTEST#5")
+
+    try:
+        sublist = ["foo", "bar", "man", "bal", "tal", "sol", "bar"]
+        sis = subsinstring("barfoothefoobarmanbarfoobaltalbarsolman", sublist)
+        matchlist = sis.find_subcombs()
+        print("searching substrings {} in {}".format(sublist, sis.str))
+        print("sublist is {}".format(matchlist))
+    except ValueError:
+        print("Value Error is received")
+    except:
+        print ("Unknown error is received {}".format(sys.exec_info()))
+
 
 
 
