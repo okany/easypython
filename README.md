@@ -36,3 +36,4 @@
 * test32 - finds list of all unique triplets in a list of integers satisfying a+b+c=0 in non-descending order
 * test33 - reads a text file and creates another text file with the reversed file content
 * test34 - finds starting position of substrings in a string S where each substring is a combination of all substrings provided in a list L
+* test35 - finds the pest time to buy and sell a stock once or unlimited times to make the maximum profit
