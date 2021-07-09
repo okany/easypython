@@ -29,7 +29,7 @@
 * test25 - prints all leaves of a binary tree
 * test26 - implements bubble sort, insertion sort, quick sort, merge sort, and bucket sort algorithms
 * test27 - implements a simple vending machine
-* test28 - finds the least common ancesstor in a binary search tree
+* test28 - finds the least common ancestor in a binary search tree
 * test29 - finds the maximum depth of a binary tree
 * test30 - creates a binary tree iterator
 * test31 - recovers a binary search tree with 2 replaced nodes
@@ -38,3 +38,4 @@
 * test34 - finds starting position of substrings in a string S where each substring is a combination of all substrings provided in a list L
 * test35 - finds the best time to buy and sell a stock once or unlimited times or fix number of times to make the maximum profit
 * test36 - finds the largest rectangle in a histogram
+* test37 - finds a, b, c, d values such that A[a]+A[b] = A[c] + A[d] where a < b and c < d and a < c and b != d and b != c
