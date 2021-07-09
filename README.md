@@ -37,3 +37,4 @@
 * test33 - reads a text file and creates another text file with the reversed file content
 * test34 - finds starting position of substrings in a string S where each substring is a combination of all substrings provided in a list L
 * test35 - finds the best time to buy and sell a stock once or unlimited times or fix number of times to make the maximum profit
+* test36 - finds the largest rectangle in a histogram
