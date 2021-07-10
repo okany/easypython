@@ -39,3 +39,4 @@
 * test35 - finds the best time to buy and sell a stock once or unlimited times or fix number of times to make the maximum profit
 * test36 - finds the largest rectangle in a histogram
 * test37 - finds a, b, c, d values such that A[a]+A[b] = A[c] + A[d] where a < b and c < d and a < c and b != d and b != c
+* test38 - finds largest distance between nodes of a tree
