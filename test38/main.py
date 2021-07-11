@@ -4,7 +4,9 @@ def create_tree(alist, depthlist):
     tr = tree(alist[0])
     tr.add_depth(depthlist)
     nodes = list()
-    nodes.append(tr)
+    # save the branches
+    if alist[1] == None or alist[1] == []:
+        nodes.append(tr)
 
     print("data = {}".format(alist[0]))
     for each in alist[1]:
@@ -17,7 +19,7 @@ def create_tree(alist, depthlist):
 def find_largest_distance(nodes):
     maxdist = 0
     for i in range(len(nodes)):
-        print("i depthlist = {}".format(nodes[i].depthlist))
+        print("node data = {} depthlist = {}".format(nodes[i].data, nodes[i].depthlist))
         for j in range(i, len(nodes)):
             #print("j depthlist = {}".format(nodes[j].depthlist))
             # set total distance to sum of the depth of two branches - root

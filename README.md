@@ -40,3 +40,4 @@
 * test36 - finds the largest rectangle in a histogram
 * test37 - finds a, b, c, d values such that A[a]+A[b] = A[c] + A[d] where a < b and c < d and a < c and b != d and b != c
 * test38 - finds largest distance between nodes of a tree
+* test39 - finds stepping numbers between two integers e.g. A=10, B=40 output = [10, 12, 21, 23, 32, 34]
