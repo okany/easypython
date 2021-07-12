@@ -3,9 +3,9 @@
 ### Simple python scripts
 
 * test1 - finds the kth minimum number in a list
-* test2 - finds the kth minimum number in a list (another version)
+* test2 - implements preorder, inorder, and postorder traversal of a binary tree with and without using recursion 
 * test3 - manipulates a number string by adding a "*" between two consecutive even numbers and "-" between two consecutive odd numbers
-* test4 - mingles two strings after crerating chunks in size n e.g. ABCDEFG and 1234567890 with 2 char chunks -> AB12CD34EF56G7890
+* test4 - itermixes two strings after crerating chunks in size n e.g. ABCDEFG and 1234567890 with 2 char chunks -> AB12CD34EF56G7890
 * test5 - finds the common words in two lists
 * test6 - demonstrates trying and catching exceptions while getting an a positive integer as an input and printing its square
 * test7 - counts the occurrence of each word in a list
@@ -24,7 +24,7 @@
 * test20 - checks if a string is a palindrome
 * test21 - reverses a singly linked list
 * test22 - implements a binary tree
-* test23 - implements preorder, inorder, and postorder traversal of a binary tree with and without using recursion 
+* test23 - searches an integer in a presorted integer array which was rotated from an unknown pivot point (array has no duplicates)
 * test24 - finds the middle node in a linked list in one pass
 * test25 - prints all leaves of a binary tree
 * test26 - implements bubble sort, insertion sort, quick sort, merge sort, and bucket sort algorithms
@@ -43,3 +43,4 @@
 * test39 - finds stepping numbers between two integers e.g. A=10, B=40 output = [10, 12, 21, 23, 32, 34]
 * test40 - returns level order of a binary tree 
 * test41 - implements a search typehead
+* test42 - finds the kth minimum number in a list (another version)

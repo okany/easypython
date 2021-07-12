@@ -1,4 +1,5 @@
-# This script implements preorder, inorder, and postorder traversal of a binary tree with and without using recursion
+# This script searches an integer in a presorted integer array which was
+# rotated from an unknown pivot point (array has no duplicates)
 #
 # This script is a part of the Easy Python project which creates a number
 # sample python scripts to answer simple programming questions. The
@@ -19,185 +20,92 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-def create_tree(alist):
-    if alist == None: return None
-    else:
-        bt = btree(alist[0])
-        for item in alist[1:]:
-            bt.insert(item)
-    return bt
+class rotated_array(list):
+    def __init__(self, alist):
+        super().__init__(alist)
 
-class btree():
-
-    def __init__(self, data):
-        self.data = data
-        self.left = None
-        self.right = None
-
-    def insert(self, data):
-        if self.data == data:
-            pass # duplicate - don't insert
-        elif self.data > data:
-            if(self.left == None):
-                # create a new node as a left child
-                self.left = btree(data)
-            else:
-                # insert to left branch
-                self.left.insert(data)
+    def isrotated(self):
+        if len(self) < 2:
+            return False
         else:
-            if(self.right == None):
-                # create a new node as a right child
-                self.right = btree(data)
+            if self[0] < self[len(self)-1]:
+                return False
             else:
-                # insert to right branch
-                self.right.insert(data)
+                return True
 
-    def find(self, data):
-        if self.data == data:
-            return data # we found it
-        elif self.data > data:
-            if(self.left == None):
-                return None # does not exists
+    def find(self, anint):
+
+        # print("self = {}".format(self))
+
+        if self == []:
+            return -1
+        elif len(self) == 1:
+            if self[0] == anint:
+                return 0
             else:
-                # search in the left branch
-                return self.left.find(data)
+                return -1
+        elif not self.isrotated():
+            if self[0] > anint or self[-1] < anint:
+                return -1
+
+        middle = len(self) >> 1
+
+        ra1 = rotated_array(self[:middle])
+        ra2 = rotated_array(self[middle:])
+
+        # print("middle = {} ra1={} ra2={}".format(middle, ra1, ra2))
+
+        ind = ra1.find(anint)
+        if ind > -1:
+            return ind
         else:
-            if(self.right == None):
-                return None # does not exists
-            else:
-                # search in the right branch
-                return self.right.find(data)
+            ind = ra2.find(anint)
+            if(ind > -1):
+                return ind + middle
 
-    def inorder_list(self):
-        ilist = []
-        if(self.left != None):
-            ilist.extend(self.left.inorder_list())
-        ilist.append(self.data)
-        if(self.right != None):
-            ilist.extend(self.right.inorder_list())
-
-        return(ilist)
-
-
-    def nr_inorder_list(self):
-        ilist = [self]
-        item = self
-        i = 0
-        leftdone = False
-        while True:
-            if(leftdone == False and item.left != None):
-                ilist.insert(i, item.left)
-                item = item.left
-            elif (item.right != None):
-                i = i + 1
-                ilist.insert(i, item.right)
-                # evaluate the right branch
-                item = item.right
-                leftdone = False
-            else:
-                i = i + 1
-                if(i<len(ilist)):
-                    # move to the parent node to look for right branch
-                    item = ilist[i]
-                    # don't search the left branch on the parent node
-                    leftdone = True
-                else:
-                    #this is the rightmost item so stop the search
-                    break
-        dlist = []
-        for item in ilist:
-            # create the data list from list of linked list items
-            dlist.append(item.data)
-
-        return dlist
-
-    def nr_preorder_list(self):
-        ilist = [self]
-        item = self
-        i = 0
-        while True:
-            if(item.right != None):
-                # insert the right node
-                ilist.insert(i+1, item.right)
-            if (item.left != None):
-                # insert the left node before the right node
-                ilist.insert(i+1, item.left)
-            i = i + 1 # move pointer to the next node
-            if(i<len(ilist)):
-                # move to the next node in the list
-                item = ilist[i]
-            else:
-                # this is the rightmost item so stop the search
-                break
-
-        dlist = []
-        for item in ilist:
-            # create the data list from list of linked list items
-            dlist.append(item.data)
-
-        return dlist
-
-    def nr_postorder_list(self):
-        ilist = [self]
-        item = self
-        i = 0
-        while True:
-            if (item.left != None):
-                # insert the left
-                ilist.insert(i, item.left)
-                i = i + 1 # move the pointer back to the parent node
-            if(item.right != None):
-                # insert the right node
-                ilist.insert(i, item.right)
-                i = i + 1 # move the pointer back to the parent node
-
-            i = i - 1 # move pointer to the previous node
-            if(i>=0):
-                # move to the previous node in the list
-                item = ilist[i]
-            else:
-                # this is the leftmost item so stop the search
-                break
-
-        dlist = []
-        for item in ilist:
-            # create the data list from list of linked list items
-            dlist.append(item.data)
-
-        return dlist
-
-    def preorder_list(self):
-        plist = [self.data]
-        if(self.left != None):
-            plist.extend(self.left.preorder_list())
-        if(self.right != None):
-            plist.extend(self.right.preorder_list())
-
-        return(plist)
-
-    def postorder_list(self):
-        plist = []
-        if (self.left != None):
-            plist.extend(self.left.postorder_list())
-        if (self.right != None):
-            plist.extend(self.right.postorder_list())
-        plist.append(self.data)
-
-        return (plist)
+        return -1
 
 if __name__ == "__main__":
 
-    al = [1, 2, 30, 4, 60, 34, 12, -1, 5, 23, 67, 35, 4, 99, -20, -45, 89, 78]
-    bt = create_tree(al)
+    array = [93, 95, 97, 111, 123, 145, 2, 4, 5, 7, 10, 12, 25, 45, 53, 70, 89]
 
-    print("     list is                        : {}".format(al))
-    print("     inorder list is                : {}".format(bt.inorder_list()))
-    print("     nonrecursive inorder list is   : {}".format(bt.nr_inorder_list()))
-    print("     preorder list is               : {}".format(bt.preorder_list()))
-    print("     nonrecursive preeorder list is : {}".format(bt.nr_preorder_list()))
-    print("     postorder list is              : {}".format(bt.postorder_list()))
-    print("     nonrecursive postorder list is : {}".format(bt.nr_postorder_list()))
+    ra = rotated_array(array)
+    anum = 45
+    index = ra.find(anum)
+    print("TEST#1 - found {} in {} at index {}".format(anum, array, index))
 
+    array = [15, 27, 42, 45, 93, 95, 97, 111, 123, 145, 2, 4, 5, 7, 10, 12]
 
+    ra = rotated_array(array)
+    anum = 45
+    index = ra.find(anum)
+    print("TEST#2 - found {} in {} at index {}".format(anum, array, index))
 
+    array = [15, 27, 42, 45, 93, 95, 97, 111, 123, 145, 2, 4, 5, 7, 10, 12]
+
+    ra = rotated_array(array)
+    anum = 49
+    index = ra.find(anum)
+    print("TEST#3 - found {} in {} at index {}".format(anum, array, index))
+
+    array = [15, 27, 42, 45, 93, 95, 97, 111, 123, 1, 2, 4]
+
+    ra = rotated_array(array)
+    anum = 123
+    index = ra.find(anum)
+    print("TEST#4 - found {} in {} at index {}".format(anum, array, index))
+
+    array = []
+
+    ra = rotated_array(array)
+    anum = 5
+    index = ra.find(anum)
+    print("TEST#5 - found {} in {} at index {}".format(anum, array, index))
+
+    array = [30, 10, 17, 25, 29]
+
+    ra = rotated_array(array)
+    anum = 29
+    index = ra.find(anum)
+    print("TEST#6 - found {} in {} at index {}".format(anum, array, index))
 
