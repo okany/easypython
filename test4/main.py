@@ -1,5 +1,4 @@
-# mingle two strings after crerating chunks in size n
-# e.g. ABCDEFG and 1234567890 with 2 char chunks -> AB12CD34EF56G7890
+# This script recovers a binary search tree with 2 replaced nodes
 #
 # This script is a part of the Easy Python project which creates a number
 # sample python scripts to answer simple programming questions. The
@@ -20,54 +19,155 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-class merger():
-    def __init__(self, list1, list2):
-        self.list1 = list1
-        self.list2 = list2
-    lista = listb = []
+def create_btree(alist):
+    bt = None
+    if alist != None and alist != []:
+        bt = btree(alist[0])
+        for each in alist[1:]:
+            add_btree(bt, each)
+    return bt
 
-    def merge(self, offset):
-        flist = list()
-
-        if len(self.list1) < len(self.list2):
-            lista = self.list1
-            listb = self.list2
+def add_btree(bt, data):
+    if data == None:
+        pass
+    elif bt == None:
+        bt = btree(data)
+    else:
+        if data == bt.data:
+            pass #duplicate, do don't do anything (or raise an except
+        elif data < bt.data:
+            if bt.left:
+                add_btree(bt.left, data)
+            else:
+                bt.left = btree(data)
         else:
-            listb = self.list1
-            lista = self.list2
+            if bt.right:
+                add_btree(bt.right, data)
+            else:
+                bt.right = btree(data)
 
-        times = int(len(lista)/offset)
-        for i in range(times):
-            flist = flist + lista[i*offset:i*offset+offset]
-            flist = flist + listb[i*offset:i*offset+offset]
-        flist = flist + lista[times*offset:len(lista)]
-        flist = flist + listb[times*offset:len(listb)]
+def recover_btree(bt):
+    reclist = bt.recover()
+    print("MIN misplaced {} and MAX misplaced {}".format(bt.recmin.data, bt.recmax.data))
+    swap_data(bt.recmin, bt.recmax)
+    return reclist
 
-        return(flist)
+def swap_data(a, b):
+    temp = a.data
+    a.data = b.data
+    b.data = temp
 
-if __name__ == '__main__':
+class btree():
+    def __init__(self, data):
+        self.data = data
+        self.left = self.right = self.parent = None
+        self.resetrecovery()
 
-    # TEST#1
-    tlist1a = ["2","3","4","2","3","5","2","4","3","5","6","4","5"]
-    tlist1b = ["a","s","d","a","s","d","a","s","f","d","s","g","g","d","f","g","d","f","f","g","h","j","f","g","h","j","g","h","j"]
+    def resetrecovery(self):
+        self.recmin = self.recmax = None
 
-    m1 = merger(tlist1a, tlist1b)
-    num1 = 2
-    print("TEST1 - {} char merged list = {}".format(num1, m1.merge(num1)))
+    # set minimum misplaced node
+    def setrecmin(self, node):
+        if(node):
+            if(self.recmin == None or self.recmin.data > node.data):
+                self.recmin = node
 
-    # TEST#2
-    tlist2a = ["1","2","3","2","3","4","2","4","5","3","6","4","5","7","5","6","7","5","8","6","7","9","7","8","0","8","9","0"]
-    tlist2b = ["x","c","v","x","c","v","c","v","b","n","f","g","h","y","r","t","y","r","t","y"]
+    # set maximum misplaced node
+    def setrecmax(self, node):
+        if(node):
+            if(self.recmax == None or self.recmax.data < node.data):
+                self.recmax = node
 
-    m2 = merger(tlist2a, tlist2b)
-    num2 = 3
-    print("TEST2 - {} char merged list = {}".format(num2, m2.merge(num2)))
+    def to_list(self):
+        alist = []
 
-    # TEST#3
-    tlist3a = ["5","6","7","8","9"]
-    tlist3b = ["q","w","e","s","k"]
+        if self.left:
+            alist.extend(self.left.to_list())
+        alist.append(self)
+        if self.right:
+            alist.extend(self.right.to_list())
 
-    m3 = merger(tlist3a, tlist3b)
-    num3 = 4
-    print("TEST3 - {} char merged list = {}".format(num3, m3.merge(num3)))
+        return alist
 
+    def to_data_list(self):
+        alist = []
+
+        if self.left:
+            alist.extend(self.left.to_data_list())
+
+        alist.append(self.data)
+
+        if self.right:
+            alist.extend(self.right.to_data_list())
+
+        return alist
+
+    def to_data_tlist(self):
+        alist = []
+
+        if self.left:
+            alist.append(self.left.to_data_tlist())
+
+        alist.append(self.data)
+
+        if self.right:
+            alist.append(self.right.to_data_tlist())
+
+        return alist
+
+    def recover(self):
+        ll = []
+        rl = []
+        self.resetrecovery()
+
+        if self.left:
+            ll = self.left.recover()
+            self.setrecmin(self.left.recmin)
+            self.setrecmax(self.left.recmax)
+            if ll[-1] and (ll[-1].data > self.data):
+                self.setrecmin(self)
+                self.setrecmax(ll[-1])
+
+        if self.right:
+            rl = self.right.recover()
+            self.setrecmin(self.right.recmin)
+            self.setrecmax(self.right.recmax)
+            if rl[0] and (rl[0].data < self.data):
+                self.setrecmin(rl[0])
+                self.setrecmax(self)
+
+        ll.append(self)
+        ll.extend(rl)
+        dl = []
+        #for each in ll:
+        #    dl.append(each.data)
+        #print ("recover = {}".format(dl))
+        return ll
+
+if __name__=="__main__":
+
+    bt = create_btree([1, 2, 30, 4, 60, 34, 12, -1, 5, 23, 67, 35, 4, 99, -20, -45, 89, 78])
+    tlist = bt.to_list()
+    print("Original tlist  = ", bt.to_data_tlist())
+
+    #test 6th and 11th replacement
+    swap_data(tlist[5], tlist[10])
+    print("broken list     = ", bt.to_data_tlist())
+    reclist = recover_btree(bt)
+    print("recovered list  = ", bt.to_data_list())
+
+    tlist = bt.to_list()
+    print("\n\nOriginal tlist  = ", bt.to_data_tlist())
+    # test min and max replacement
+    swap_data(tlist[0], tlist[16])
+    print("broken list     = ", bt.to_data_tlist())
+    reclist = recover_btree(bt)
+    print("recovered list  = ", bt.to_data_list())
+
+    tlist = bt.to_list()
+    print("\n\nOriginal tlist  = ", bt.to_data_tlist())
+    # test 7th and 15th replacement
+    swap_data(tlist[6], tlist[14])
+    print("broken list     = ", bt.to_data_tlist())
+    reclist = recover_btree(bt)
+    print("recovered list  = ", bt.to_data_list())

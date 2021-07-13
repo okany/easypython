@@ -1,4 +1,4 @@
-# This script implements a binary tree
+# This script creates a binary tree iterator
 #
 # This script is a part of the Easy Python project which creates a number
 # sample python scripts to answer simple programming questions. The
@@ -19,85 +19,105 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-def create_binary_tree(alist):
-    try:
-        if alist is None: return None
-        else:
-            bt = btree(alist[0])
-            for item in alist[1:]:
-                bt.insert(item)
-    except:
-        raise
-
+def create_btree(alist):
+    bt = None
+    if (alist != None and alist != []):
+        bt = btree(alist[0])
+        for each in alist [1:]:
+            bt.add(each)
     return bt
 
 class btree():
     def __init__(self, data):
-        self.left = None
-        self.right = None
         self.data = data
+        self.left = self.right = None
+        self.parent = None
 
-    def find(self, data):
-        if self.data == data:
-            return self
-        elif self.data > data:
-            if(self.left != None):
-                return self.left.find(data)
-            else:
-                return None
+    def add(self, data):
+        ret = False
+        if data == self.data:
+            # error - skip it
+            pass
         else:
-            if(self.right != None):
-                return self.right.find(data)
+            next = None
+            if(self.data > data):
+                next = self.left
             else:
-                return None
+                next = self.right
 
-    def insert(self, num):
-        if self.data == num:
-            raise ValueError
-        elif self.data > num:
-            if self.left == None:
-                self.left = btree(num)
+            if(next == None):
+                node = btree(data)
+                node.parent = self
+                if(self.data > data):
+                    self.left = node
+                else:
+                    self.right = node
+                ret = True
             else:
-                self.left.insert(num)
-        else:
-            if self.right == None:
-                self.right = btree(num)
-            else:
-                self.right.insert(num)
+                ret = next.add(data)
+        return ret
 
     def to_list(self):
-        alist = llist = rlist = []
-        if(self.left != None):
-            llist = self.left.to_list()
-            alist.extend(llist)
+        alist = []
+
+        if(self.left):
+            alist.append(self.left.to_list())
         alist.append(self.data)
-        if(self.right != None):
-            rlist = self.right.to_list()
-            alist.extend(rlist)
+        if(self.right):
+            alist.append(self.right.to_list())
 
         return alist
 
-if __name__ == "__main__":
+class iter():
+    def __init__(self, bt):
+        self.bt = bt
+        self.cur = None
 
-    try:
-        al = [1, 2, 30, 4, 60, 34, 12, -1 , 5, 23, 67, 35, 4, 99, -20, -45, 89, 78]
-        bt = create_binary_tree(al)
-        num = 55
+    def begin(self):
+        if(self.bt.left):
+            it = iter(self.bt.left)
+            return(it.begin())
+        else:
+            return self.bt
 
-        print("{} node in binary tree {} is {}".format(num, bt.to_list(), bt.find(num)))
+    def end(self):
+        if(self.bt.right):
+            it = iter(self.bt.right)
+            return(it.end())
+        else:
+            return self.bt
 
-    except:
-        print ("list is not unique")
+    def next(self):
+        bt = self.cur
+        self.cur = None
+        if(bt.right):
+            it = iter(bt.right)
+            self.cur = it.begin()
+        else:
+            while (bt.parent and self.cur == None):
+                if(bt.parent.right != bt):
+                    self.cur = bt.parent
+                else:
+                    bt = bt.parent
 
-    try:
-        al = [1, 2, 30, 4, 60, 34, 12, -1 , 5, 23, 67, 35, 99, -20, -45, 89, 78]
-        bt = create_binary_tree(al)
+        return self.cur
 
-        num = 55
-        print("{} node in binary tree {} is {}".format(num, bt.to_list(), bt.find(num)))
+    def setcurrent(self, node):
+        self.cur = node
 
-        num = 99
-        print("{} node in binary tree {} is {}".format(num, bt.to_list(), bt.find(num)))
+    def current(self):
+        return self.cur
 
-    except:
-        print ("list is not unique")
+if __name__=="__main__":
+
+    alist = [1, 2, 30, 4, 60, 34, 12, -1, 5, 23, 67, 35, 4, 99, -20, -45, 89, 78]
+    bt = create_btree(alist)
+    print("list is {}".format(alist))
+    print("btree is {}".format(bt.to_list()))
+
+    it = iter(bt)
+    it.setcurrent(it.begin())
+    print ("it begin = {} and it end {}".format(it.current().data, it.end().data))
+
+    while(it.current() != it.end()):
+        print ("in next= {}".format(it.next().data))

@@ -1,4 +1,4 @@
-# This script creates a binary tree iterator
+# This script returns level order of a binary tree
 #
 # This script is a part of the Easy Python project which creates a number
 # sample python scripts to answer simple programming questions. The
@@ -18,106 +18,79 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
-
 def create_btree(alist):
-    bt = None
-    if (alist != None and alist != []):
-        bt = btree(alist[0])
-        for each in alist [1:]:
-            bt.add(each)
-    return bt
+    head = None
+    if not alist or alist == []:
+        pass
+    else:
+        tn = treenode(alist[0])
+        head = tn
+        for item in alist[1:]:
+            tn.add_node(item)
 
-class btree():
+    return head
+
+def create_levelorder(tn):
+    lvl = 0
+    lolist = list()
+    tn.levelorder(lolist, 0)
+
+    return lolist
+
+class treenode():
     def __init__(self, data):
         self.data = data
-        self.left = self.right = None
-        self.parent = None
+        self.left = None
+        self.right = None
 
-    def add(self, data):
-        ret = False
-        if data == self.data:
-            # error - skip it
-            pass
+    def add_node(self, data):
+        if(data<self.data):
+            if(self.left):
+                self.left.add_node(data)
+            else:
+                self.left = treenode(data)
+        elif(data>self.data):
+            if(self.right):
+                self.right.add_node(data)
+            else:
+                self.right = treenode(data)
         else:
-            next = None
-            if(self.data > data):
-                next = self.left
-            else:
-                next = self.right
+            pass # duplicate node, just ignore
 
-            if(next == None):
-                node = btree(data)
-                node.parent = self
-                if(self.data > data):
-                    self.left = node
-                else:
-                    self.right = node
-                ret = True
-            else:
-                ret = next.add(data)
-        return ret
+    def levelorder(self, lolist, lvl):
+        if(len(lolist) <= lvl):
+            lolist.append(list())
 
-    def to_list(self):
-        alist = []
-
+        lolist[lvl].append(self.data)
         if(self.left):
-            alist.append(self.left.to_list())
-        alist.append(self.data)
+            self.left.levelorder(lolist, lvl+1)
+
         if(self.right):
-            alist.append(self.right.to_list())
+            self.right.levelorder(lolist, lvl+1)
 
-        return alist
+if __name__ == "__main__":
 
-class iter():
-    def __init__(self, bt):
-        self.bt = bt
-        self.cur = None
+    tlist = [20, 34, 10, 11, 45, 42, 13, 17, 25, 28, 5, 7]
 
-    def begin(self):
-        if(self.bt.left):
-            it = iter(self.bt.left)
-            return(it.begin())
-        else:
-            return self.bt
+    tr = create_btree(tlist)
 
-    def end(self):
-        if(self.bt.right):
-            it = iter(self.bt.right)
-            return(it.end())
-        else:
-            return self.bt
+    lolist = create_levelorder(tr)
 
-    def next(self):
-        bt = self.cur
-        self.cur = None
-        if(bt.right):
-            it = iter(bt.right)
-            self.cur = it.begin()
-        else:
-            while (bt.parent and self.cur == None):
-                if(bt.parent.right != bt):
-                    self.cur = bt.parent
-                else:
-                    bt = bt.parent
+    print("test#1 - levelorder of {} is {}".format(tlist, lolist))
 
-        return self.cur
+    tlist = [15, 2, 60, 72, 48, 12, 11, 20, 34, 10, 11, 45, 42, 13, 17, 25, 28, 5, 7]
 
-    def setcurrent(self, node):
-        self.cur = node
+    tr = create_btree(tlist)
 
-    def current(self):
-        return self.cur
+    lolist = create_levelorder(tr)
 
-if __name__=="__main__":
+    print("test#2 - levelorder of {} is {}".format(tlist, lolist))
 
-    alist = [1, 2, 30, 4, 60, 34, 12, -1, 5, 23, 67, 35, 4, 99, -20, -45, 89, 78]
-    bt = create_btree(alist)
-    print("list is {}".format(alist))
-    print("btree is {}".format(bt.to_list()))
+    tlist = [1]
 
-    it = iter(bt)
-    it.setcurrent(it.begin())
-    print ("it begin = {} and it end {}".format(it.current().data, it.end().data))
+    tr = create_btree(tlist)
 
-    while(it.current() != it.end()):
-        print ("in next= {}".format(it.next().data))
+    lolist = create_levelorder(tr)
+
+    print("test#3 - levelorder of {} is {}".format(tlist, lolist))
+

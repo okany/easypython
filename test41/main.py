@@ -1,4 +1,5 @@
-# This script implements a search typehead
+# This script demonstrates trying and catching exceptions while getting an a positive integer as an input
+# and printing its square
 #
 # This script is a part of the Easy Python project which creates a number
 # sample python scripts to answer simple programming questions. The
@@ -18,91 +19,32 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
-class search_typehead():
-    def __init__(self, alist):
-        self.adict = dict()
-        thn = None
-        for word in alist:
-            print("word = {}".format(word))
-            thn = self.adict.get(word[0])
-            if not thn:
-                thn = thnode(word[0])
-                self.adict[word[0]] = thn
 
-            thn.add_word(word, 1)
+class square(int):
+    def __init__(self, num):
+        self = num
 
-    def find_typehead(self, wpart):
+    def getnum(self):
+        return self
 
-        thn = self.adict.get(wpart[0])
-        if not thn:
-            return []
-        else:
-            return thn.find_typehead(wpart, 1)
+    def getsqr(self):
+        return (self * self)
 
-    def print(self):
-        for each in self.adict.values():
-            print("search_typehead = {}".format(each))
-            each.print()
+# Press the green button in the gutter to run the script.
+if __name__ == '__main__':
 
-class thnode():
-    def __init__(self, achar):
-        self.char = achar
-        self.next = dict()
-        self.word = None
-
-    def add_word(self, word, index):
-        if index == len(word) - 1:
-            self.word = word
-        else:
-            thn = self.next.get(word[index])
-            if not thn:
-                thn = thnode(word[index])
-                self.next[word[index]] = thn
-
-            thn.add_word(word, index+1)
-
-    def find_typehead(self, wpart, index):
-        thlist = []
-
-        if index == len(wpart):
-            if(self.word):
-                thlist.append(self.word)
-
-            for item in self.next.values():
-                alist = item.find_typehead(wpart, index)
-                thlist.extend(alist)
-        else:
-            alist = []
-            thn = self.next.get(wpart[index])
-            if thn:
-                alist = thn.find_typehead(wpart, index + 1)
-
-            thlist.extend(alist)
-
-        return thlist
-
-    def print(self):
-        print("char = {} word = {}".format(self.char, self.word))
-        print("dictionary:")
-        for each in self.next.values():
-            each.print()
-
-if __name__=="__main__":
-    alist = ["michael", "michael phelp", "mich", "john", "john wayne",
-             "johny", "mark", "markus", "michael phone", "mindy", "joan", "joan ark"]
-
-    sth = search_typehead(alist)
-
-    sth.print()
-
-    wpart = "mic"
-    print("typehead list for {} is {} ".format(wpart, sth.find_typehead(wpart)))
-
-    wpart = "jo"
-    print("typehead list for {} is {} ".format(wpart, sth.find_typehead(wpart)))
-
-    wpart = "min"
-    print("typehead list for {} is {} ".format(wpart, sth.find_typehead(wpart)))
-
-    wpart = "po"
-    print("typehead list for {} is {} ".format(wpart, sth.find_typehead(wpart)))
+    try:
+        numstr = input("Enter a number: ")
+        num = int(numstr)
+        if num < 0: raise ValueError
+    except NameError:
+        print("Name Error")
+    except ValueError:
+        print("Value Error")
+    except IOError:
+        print("I/O Error")
+    except:
+        print("not a valid entry")
+    else:
+        numobj = square(num)
+        print("Square of {0} is {1}".format(numobj.getnum(), numobj.getsqr()))

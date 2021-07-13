@@ -1,4 +1,4 @@
-# count the occurrence of each word in a list
+# This script finds the largest rectangle in a histogram
 #
 # This script is a part of the Easy Python project which creates a number
 # sample python scripts to answer simple programming questions. The
@@ -18,32 +18,107 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
-
-class listcount(list):
+class histogram(list):
     def __init__(self, alist):
+        # pad the list with 0s to set boundaries for the calculation
+        # the 0s act like histogram data with 0 value on each side of the histogram
+        # this simplifies the program while does not affect the result
+        alist.insert(0,0)
+        alist.append(0)
         super().__init__(alist)
-        self.adict = dict()
-        self.createdict()
+        self.sorted = []
+        self.used = []
+        self.max_rect_area = 0
+        print("alist= {}".format(alist))
 
-    def createdict(self):
-        for item in self:
-            if (self.adict.get(item) == None):
-                self.adict[item] = 1
-            else:
-                self.adict[item] = self.adict[item]+1
+    def insert_sorted(self, i):
+        index = 0
+        while index < len(self.sorted):
+            # print("insert_sorted index={} self.sorted={} len(self.sorted)={} i={}".format(index, self.sorted,                                                                     len(self.sorted), i))
+            if self[self.sorted[index]] > self[i]:
+                break
+            index += 1
 
-    def printcounts(self):
-        print("WORD COUNT = {}".format(self.adict))
+        self.sorted.insert(index, i)
 
+    def create_sorted(self):
+        self.sorted.append(0)
+
+        for i in range(1, len(self)):
+            self.insert_sorted(i)
+        print("self.sorted = {}".format(self.sorted))
+
+    def insert_used(self, i):
+        index = 0
+        while index < len(self.used):
+            if self.used[index] > i:
+                break
+            index += 1
+        self.used.insert(index, i)
+
+        return index
+
+    def initialize_used(self):
+        # initialize the used list with imaginary histogram blocks
+        self.used = []
+
+    def get_used_value(self, index):
+        return(self[self.used[index]])
+
+    def calculate_rectangle_area(self, used_index):
+        print("self.used = {} used_index = {} self[used_index] = {}".format(self.used, used_index, self[used_index]))
+
+        # return 0 for the boundary values
+        if(used_index == 0 or used_index == len(self.used) -1 ): return 0
+
+        prev = used_index - 1
+        while prev > 0 and self.get_used_value(prev) == self.get_used_value(used_index):
+            prev -= 1
+
+        print("prev = {}".format(prev))
+
+        next = used_index + 1
+        while next < len(self.used)-1 and self.get_used_value(next) == self.get_used_value(used_index):
+            next += 1
+
+        print("next = {}".format(next))
+
+        rect_area = self[self.used[used_index]] * (self.used[next] - self.used[prev] - 1 )
+
+        return rect_area
+
+    def largest_rect(self):
+        # sort all histogram values in increasing order
+        # first rectangle will be bounded by the shortest historam value
+        self.create_sorted()
+        # initialize used with two imaginary histogram values 0 and histogram+1 values
+        self.initialize_used()
+
+        while self.sorted != []:
+            # calculate the area of the first rectangle
+            hist_val = self.sorted.pop(0)
+            # insert the popped histogram value into the used histogram list
+            used_index = self.insert_used(hist_val)
+            rect_area = self.calculate_rectangle_area(used_index)
+            print("rect_area = {}".format(rect_area))
+
+            if(rect_area > self.max_rect_area):
+                # update the max rectangle area if the area is greater
+                self.max_rect_area = rect_area
+
+        return self.max_rect_area
+
+# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    test1 = "Conflation algorithms areused in Information Retrieval (IR) systems for matching the morphological variants of terms for efficient indexing and faster retrieval operations. The conflation process can be done either manually or automatically. The automatic conflation operation is also called stemming. Frakes [1] categorizes stemming methods into four groups: Manuscript received July 9, 2007. Okan Yilmaz, Student Member, IEEE, William Frakes, Member, IEEE A Case Study of Using Domain Analysis for the Conflation Algorithms Domain IN the early 1980s software companies started the systematic reuse process through domain engineering to improve software productivity and quality. There has been insufficient empirical study of the domain engineering process and domain products such as reusable components and generators. This paper addresses this problem by documenting and empirically evaluating a domain engineering project for the conflation algorithms domain. This domain is important for many types of systems such as information retrieval systems, search engines, and word processors. The application generator developed for this study extends the domain scope compared to previous ones. affix removal, successor variety, n-gram and table lookup. Affix removal is the most intuitive and commonly used of these algorithm types. In order to determine the stem, affix removal algorithms remove suffixes and sometimes also prefixes of terms. Successor variety and n-gram methods analyze a word corpus to determine the stems of terms. Successor variety bases its analysis on the frequency of letter sequences in terms, while n-gram conflates terms into groups based on the ratio of common letter sequences, called n-grams. Table lookup based methods use tables which map terms to their stems."
-    test2 = "We did a domain analysis for the semantic automatic conflation algorithms domain. We analyzed 3 affix removal stemmers, a successor variety stemmer, an n-gram stemmer, and a table lookup stemmer. Based on this analysis, we created a generic architecture, determined reusable components, and designed and developed a little language and an application generator for this domain. We compared the performance of the automatically generated algorithms with their original versions and found that automatically generated versions of the algorithms are nearly as precise as the original versions."
 
-    list1 = list(test1.split())
-    list2 = list(test2.split())
+    alist = [12, 15, 17, 25, 40, 55, 30, 24, 60, 80, 90]
 
-    wc1 = listcount(list1)
-    wc1.printcounts()
+    hist = histogram(alist)
 
-    wc2 = listcount(list2)
-    wc2.printcounts()
+    print("LARGEST RECTANGLE FOR {} is {}".format(alist, hist.largest_rect()))
+
+    alist = [12, 15, 17, 25, 25, 14, 12, 40, 55, 30, 24, 18, 18, 20, 60, 80, 90]
+
+    hist = histogram(alist)
+
+    print("LARGEST RECTANGLE FOR {} is {}".format(alist, hist.largest_rect()))

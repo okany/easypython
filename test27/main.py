@@ -1,4 +1,4 @@
-# This script implements a simple vending machine
+# This script implements a binary tree
 #
 # This script is a part of the Easy Python project which creates a number
 # sample python scripts to answer simple programming questions. The
@@ -19,84 +19,85 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-class order():
-    def __init__(self, money, item):
-        self.money = money
-        self.item = item
-
-class item():
-    def __init__(self, name, price):
-        self.name = name
-        self.price = price
-
-    def to_str(self):
-        astr = "item = (name = " + self.name + " price = "  + str(self.price) + ")"
-        return astr
-
-class invitem():
-    def __init__(self, item,  count):
-        self.item = item
-        self.count = count
-
-    def remove(self, num=1):
-        self.count = self.count - num
-
-    def add(self, num=1):
-        self.count = self.count + num
-
-    def print(self):
-        print("{}, count = {}".format(self.item.to_str(), self.count))
-
-class vmachine():
-    def __init__(self, list):
-        self.dict = dict()
-        for each in list:
-            self.add(invitem(item(each[0], each[1]), each[2]))
-
-    def add(self, invitem):
-        if(self.dict.get(invitem.item.name)):
-            self.dict[invitem.item.name].count = self.dict[invitem.item.name].count + invitem.count
+def create_binary_tree(alist):
+    try:
+        if alist is None: return None
         else:
-            self.dict[invitem.item.name] = invitem
+            bt = btree(alist[0])
+            for item in alist[1:]:
+                bt.insert(item)
+    except:
+        raise
 
-    def sell(self, order, num=1):
-        trans = False
-        invitem = self.dict.get(order.item)
-        remain = order.money
+    return bt
 
-        if(invitem):
-            cost = invitem.item.price*num
-            if(cost < order.money):
-                trans  = True
-                remain = order.money - cost
-                invitem.count = invitem.count - num
-                return trans, remain
-        return trans, remain
+class btree():
+    def __init__(self, data):
+        self.left = None
+        self.right = None
+        self.data = data
 
-    def print(self):
-        for each in self.dict.values():
-            each.print()
+    def find(self, data):
+        if self.data == data:
+            return self
+        elif self.data > data:
+            if(self.left != None):
+                return self.left.find(data)
+            else:
+                return None
+        else:
+            if(self.right != None):
+                return self.right.find(data)
+            else:
+                return None
+
+    def insert(self, num):
+        if self.data == num:
+            raise ValueError
+        elif self.data > num:
+            if self.left == None:
+                self.left = btree(num)
+            else:
+                self.left.insert(num)
+        else:
+            if self.right == None:
+                self.right = btree(num)
+            else:
+                self.right.insert(num)
+
+    def to_list(self):
+        alist = llist = rlist = []
+        if(self.left != None):
+            llist = self.left.to_list()
+            alist.extend(llist)
+        alist.append(self.data)
+        if(self.right != None):
+            rlist = self.right.to_list()
+            alist.extend(rlist)
+
+        return alist
 
 if __name__ == "__main__":
 
-    inv = [["choclate", 10, 25], ["gum", 1, 100], ["coke", 5, 50]]
-    vm = vmachine(inv)
+    try:
+        al = [1, 2, 30, 4, 60, 34, 12, -1 , 5, 23, 67, 35, 4, 99, -20, -45, 89, 78]
+        bt = create_binary_tree(al)
+        num = 55
 
-    vm.print()
+        print("{} node in binary tree {} is {}".format(num, bt.to_list(), bt.find(num)))
 
-    money = 50
+    except:
+        print ("list is not unique")
 
-    ord = order(money, "gum")
-    trans, money = vm.sell(ord, 5)
-    print("transaction = {}, remain = {}".format(trans, money))
-    vm.print()
+    try:
+        al = [1, 2, 30, 4, 60, 34, 12, -1 , 5, 23, 67, 35, 99, -20, -45, 89, 78]
+        bt = create_binary_tree(al)
 
-    ord = order(money, "choclate")
-    trans, money = vm.sell(ord, 6)
-    print("transaction = {}, remain = {}".format(trans, money))
-    vm.print()
+        num = 55
+        print("{} node in binary tree {} is {}".format(num, bt.to_list(), bt.find(num)))
 
-    ord = order(money, "coke")
-    trans, money = vm.sell(ord, 2)
-    print("transaction = {}, remain = {}".format(trans, money))
-    vm.print()
+        num = 99
+        print("{} node in binary tree {} is {}".format(num, bt.to_list(), bt.find(num)))
+
+    except:
+        print ("list is not unique")

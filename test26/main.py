@@ -1,4 +1,4 @@
-# This script implements bubble sort, insertion sort, quick sort, merge sort, and bucket sort algorithms
+# count the occurrence of each word in a list
 #
 # This script is a part of the Easy Python project which creates a number
 # sample python scripts to answer simple programming questions. The
@@ -19,149 +19,31 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-class slist(list):
+class listcount(list):
+    def __init__(self, alist):
+        super().__init__(alist)
+        self.adict = dict()
+        self.createdict()
 
-    def __init__(self, slist):
-        super().__init__(slist)
-        self.blist = slist
-        self.ilist = slist
-        self.bclist = []
-
-    def bubblesort(self):
-        last = len(self) - 1
-        while last > 0:
-            for i in range(last):
-                if self.blist[i] > self.blist[i+1]:
-                    temp = self.blist[i]
-                    self.blist[i] = self.blist[i+1]
-                    self.blist[i+1] = temp
-            last = last - 1
-        return self.blist
-
-    def insertionsort(self):
-        last = len(self)
-        first = 0
-        while first < last:
-            min = self.ilist[first]
-            mindex = first
-            for i in range(first+1, last):
-                if self.ilist[i] < min:
-                    min = self.ilist[i]
-                    mindex = i
-            if(mindex != first):
-                self.ilist.pop(mindex)
-                self.ilist.insert(0,min)
-            first = first + 1
-
-        return self.ilist
-
-    def findminmax(self):
-        min = max = self[0]
-        for each in self:
-            if each < min:
-                min = each
-            elif each > max:
-                max = each
-        return min, max
-
-    def bucketsort(self, k):
-        if(len(self)<=1): return self
-        min, max = self.findminmax()
-        bucket = []
-        bsize = int((max - min)/k)+1
-        for i in range(k):
-            bucket.append([])
-        for each in self:
-            bucket[int((each-min)/bsize)].append(each)
-
-        for i in range(k):
-            alist = slist(bucket[i])
-            self.bclist.extend(alist.insertionsort())
-
-        return self.bclist
-
-
-def partition(list, pi):
-    low = []
-    high = []
-    for i in range(len(list)):
-        if i == pi: pass
-        elif list[i] > list[pi]:
-            high.append(list[i])
-        else:
-            low.append(list[i])
-    return low, high
-
-def quicksort(list):
-    if(list == None): return None
-    elif(len(list) <= 1):
-        return list
-    else:
-        low, high = partition(list, 0)
-        # print("low = {}, pivot = {}, high = {}".format(low, list[0], high))
-        qlist = quicksort(low)
-        qlist.append(list[0])
-        qlist.extend(quicksort(high))
-
-    return qlist
-
-def mergesort(list):
-    if list == None: return None
-    elif(len(list) <=1): return list
-    else:
-        mid = int(len(list)/2)
-        alist = list[:mid]
-        blist = list[mid:]
-        amlist = mergesort(alist)
-        bmlist = mergesort(blist)
-        i = j = 0
-        mlist = []
-        while(i<len(amlist) and j<len(bmlist)):
-            if(amlist[i]<bmlist[j]):
-                mlist.append(amlist[i])
-                i = i + 1
+    def createdict(self):
+        for item in self:
+            if (self.adict.get(item) == None):
+                self.adict[item] = 1
             else:
-                mlist.append(bmlist[j])
-                j = j + 1
-        mlist.extend(amlist[i:])
-        mlist.extend(bmlist[j:])
+                self.adict[item] = self.adict[item]+1
 
-    return mlist
+    def printcounts(self):
+        print("WORD COUNT = {}".format(self.adict))
 
 if __name__ == '__main__':
-    al = slist([1, 2, 30, 4, 60, 34, 12, -1, 5, 23, 67, 35, 4, 99, -20, -45, 89, 78])
+    test1 = "Conflation algorithms areused in Information Retrieval (IR) systems for matching the morphological variants of terms for efficient indexing and faster retrieval operations. The conflation process can be done either manually or automatically. The automatic conflation operation is also called stemming. Frakes [1] categorizes stemming methods into four groups: Manuscript received July 9, 2007. Okan Yilmaz, Student Member, IEEE, William Frakes, Member, IEEE A Case Study of Using Domain Analysis for the Conflation Algorithms Domain IN the early 1980s software companies started the systematic reuse process through domain engineering to improve software productivity and quality. There has been insufficient empirical study of the domain engineering process and domain products such as reusable components and generators. This paper addresses this problem by documenting and empirically evaluating a domain engineering project for the conflation algorithms domain. This domain is important for many types of systems such as information retrieval systems, search engines, and word processors. The application generator developed for this study extends the domain scope compared to previous ones. affix removal, successor variety, n-gram and table lookup. Affix removal is the most intuitive and commonly used of these algorithm types. In order to determine the stem, affix removal algorithms remove suffixes and sometimes also prefixes of terms. Successor variety and n-gram methods analyze a word corpus to determine the stems of terms. Successor variety bases its analysis on the frequency of letter sequences in terms, while n-gram conflates terms into groups based on the ratio of common letter sequences, called n-grams. Table lookup based methods use tables which map terms to their stems."
+    test2 = "We did a domain analysis for the semantic automatic conflation algorithms domain. We analyzed 3 affix removal stemmers, a successor variety stemmer, an n-gram stemmer, and a table lookup stemmer. Based on this analysis, we created a generic architecture, determined reusable components, and designed and developed a little language and an application generator for this domain. We compared the performance of the automatically generated algorithms with their original versions and found that automatically generated versions of the algorithms are nearly as precise as the original versions."
 
-    print("\nOriginal list         = ", al)
-    print("Bubble sorted list    = ", al.bubblesort())
-    print("Insertion sorted list = ", al.insertionsort())
-    print("Quick sorted list     = ", quicksort(al))
-    print("Merge sorted list     = ", mergesort(al))
-    print("Bucket sorted list    = ", al.bucketsort(5))
+    list1 = list(test1.split())
+    list2 = list(test2.split())
 
-    al2 = slist([])
+    wc1 = listcount(list1)
+    wc1.printcounts()
 
-    print("\nOriginal list         = ", al2)
-    print("Bubble sorted list    = ", al2.bubblesort())
-    print("Insertion sorted list = ", al2.insertionsort())
-    print("Quick sorted list     = ", quicksort(al2))
-    print("Merge sorted list     = ", mergesort(al2))
-    print("Bucket sorted list    = ", al2.bucketsort(3))
-
-    al3 = slist([1])
-
-    print("\nOriginal list         = ", al3)
-    print("Bubble sorted list    = ", al3.bubblesort())
-    print("Insertion sorted list = ", al3.insertionsort())
-    print("Quick sorted list     = ", quicksort(al3))
-    print("Merge sorted list     = ", mergesort(al3))
-    print("Bucket sorted list    = ", al3.bucketsort(7))
-
-    al4 = slist([10, 1])
-
-    print("\nOriginal list         = ", al4)
-    print("Bubble sorted list    = ", al4.bubblesort())
-    print("Insertion sorted list = ", al4.insertionsort())
-    print("Quick sorted list     = ", quicksort(al4))
-    print("Merge sorted list     = ", mergesort(al4))
-    print("Bucket sorted list    = ", al4.bucketsort(2))
-
+    wc2 = listcount(list2)
+    wc2.printcounts()

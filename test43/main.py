@@ -1,4 +1,5 @@
-# check if a string has all digits
+# This script manipulates a number string by adding a "*" between two
+# consecutive even numbers and "-" between two consecutive odd numbers
 #
 # This script is a part of the Easy Python project which creates a number
 # sample python scripts to answer simple programming questions. The
@@ -19,24 +20,36 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-class digitstr(str):
-
+class strmanup(str):
     def __init__(self, astr):
+        super().__init__()
+        self.offset = 0
         self = astr
 
-    def alldigits(self):
-        if self == "": return False
-        else: return(self.checkdig(self))
+    def isEven(self, i):
+        return((int(self[i]) % 2) == 0)
 
-    def checkdig(self, astr):
-        if(astr == ""):
-            return True
-        elif(astr[0].isdigit()):
-            return self.checkdig(astr[1:])
-        else:
-            return False
+    def isOdd(self, i):
+        return((int(self[i]) % 2) != 0)
+
+    def manupstr(self, offset):
+        newstr = ""
+        if(len(self)<offset):
+            return self
+
+        for i in range(len(self)-offset+1):
+            newstr = newstr + self[i]
+            if (self.isEven(i) and self.isEven(i+1)):
+                newstr = newstr + "*"
+            elif (self.isOdd(i) and self.isOdd(i+1)):
+                newstr = newstr + "-"
+        return newstr
 
 if __name__ == '__main__':
+    astr = "1235353565675675567889098"
+    offset = 2
 
-    astr = digitstr("23423423y5")
-    print("alldigit? = ", astr.alldigits())
+    strobj = strmanup(astr)
+
+    print("NEWSTR=", strobj.manupstr(2))
+
