@@ -46,3 +46,5 @@
 * test42 - finds the kth minimum number in a list (another version)
 * test43 - manipulates a number string by adding a "*" between two consecutive even numbers and "-" between two consecutive odd numbers
 * test44 - implements power function with modulo operator
+* test45 - searches for a range (a, b) in a sorted integer array A where a and b represent the first and last occurences of integer B
+* test46 - reverses a linked list partially between two values
