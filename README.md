@@ -13,7 +13,7 @@
 * test9 - determines if two strings are anagram or not
 * test10 - prints the first non-repeated character from a string
 * test11 - reverses a string by using recursion
-* test12 - finds the median of an array which is created by merging two sorted arrays
+* test12 - finds the median of an array which is created by merging two sorted arrays in O(log n+m)
 * test13 - implements a simple vending machine
 * test14 - removes duplicate entries in a list
 * test15 - checks if 2 strings are rotation of each other
@@ -45,3 +45,4 @@
 * test41 - demonstrates trying and catching exceptions while getting a positive integer as an input and printing its square
 * test42 - finds the kth minimum number in a list (another version)
 * test43 - manipulates a number string by adding a "*" between two consecutive even numbers and "-" between two consecutive odd numbers
+* test44 - implements power function with modulo operator
