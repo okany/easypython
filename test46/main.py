@@ -109,15 +109,15 @@ if __name__=="__main__":
     ll = create_linked_list(alist)
 
     blist = create_list(ll)
-    print("TEST#1: recreated linked list is {}".format(blist))
+    print("recreated the linked list is {}".format(blist))
 
     head = reverse_list(ll, 4, 17)
     rlist = create_list(head)
-    print("TEST#2: reversed linked list is {}".format(rlist))
+    print("TEST#1: reversed linked list is {}".format(rlist))
 
     head = reverse_list(ll, 10, 35)
     rlist = create_list(head)
-    print("TEST#3: reversed linked list is {}".format(rlist))
+    print("TEST#2: reversed linked list is {}".format(rlist))
 
     head = reverse_list(ll, 1, 10)
     rlist = create_list(head)

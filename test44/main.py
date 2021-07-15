@@ -25,29 +25,24 @@ class power():
         self.n = n
         self.d = d
         self.pow_div = -1
-        self.dict = dict()
         self.list = []
         result = None
         div = 1
         for num in range(1, self.n):
             div = (div * self.x) % self.d
-            apow = self.dict.get(div)
-            # print("get apow={} div={} to dict".format(apow, div))
-            if(apow != None):
-                # print("repeating num={} div={} to dict".format(num, div))
-                # found a repeat - repeats after every dif powers
-                dif = num - apow
+            # print("div={}".format(div))
+            if(self.list != [] and self.list[0] == div):
                 # power(x, n) % d = power(x, ind) % d
-                ind = (self.n % dif) - 1
+                ind = (self.n % len(self.list)) - 1
+                # print("num = {} ind = {} div = {}".format(num, ind, div))
                 if ind < 0: # the last value in the list is repeating
-                    ind = dif - 1
+                    ind = ind + len(self.list)
                 # print("ind = {}".format(ind))
                 self.pow_div = self.list[ind]
                 break
             else:
                 # print("adding num={} div={} to dict".format(num, div))
                 self.list.append(div)
-                self.dict[div] = num
 
     def get_power_div(self):
         return self.pow_div
