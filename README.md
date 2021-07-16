@@ -49,3 +49,4 @@
 * test45 - searches for a range (a, b) in a sorted integer array A where a and b represent the first and last occurences of integer B
 * test46 - reverses a linked list partially between two values
 * test47 - calculates combination sum of a set of numbers (C) such that sum equals to target number (T)
+* test48 - finds all unique permutations of a list of numbers
