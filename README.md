@@ -1,6 +1,6 @@
 ## easypython
 
-### Simple python scripts
+### Simple python scripts solving well known programming interview questions
 
 * test1 - finds the kth minimum number in a list
 * test2 - implements preorder, inorder, and postorder traversal of a binary tree with and without using recursion 
