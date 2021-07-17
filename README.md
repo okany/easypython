@@ -50,3 +50,5 @@
 * test46 - reverses a linked list partially between two values
 * test47 - calculates combination sum of a set of numbers (C) such that sum equals to target number (T)
 * test48 - finds all unique permutations of a list of numbers
+* test49 - evaluates an expression in reverse polish notation
+* test50 - finds contiguous subarray within an array, A of length N which has the largest sum
