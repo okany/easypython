@@ -1,4 +1,4 @@
-# Find duplicate characters in a string
+# Find the kth minimum of a list
 #
 # This script is a part of the Easy Python project which creates a number
 # sample python scripts to answer simple programming questions. The
@@ -19,31 +19,95 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-class stringdups(str):
-    def __init__(self, astr):
-        self.strdict = dict()
-        self.strdups = []
-        self = astr
+import sys
+class datalist(list):
 
-    def finddups(self):
-        for char in self:
-            if self.strdict.get(char) == None:
-                self.strdict[char] = 1
-            else:
-                self.strdict[char] = self.strdict[char] + 1
-                if self.strdict[char] == 2:
-                    self.strdups.append(char)
+    def __init__(self, k, alist):
+        self.fname = ""
+        self.kvalue = k
+        super().__init__(alist)
+        self.klist = []
 
-        return(self.strdups)
+    def readdata(self):
+        print("Please enter the data file name:")
+        for self.fname in sys.stdin:
+            break
+
+        try:
+            # open file
+            f = open(self.fname.rstrip())
+        except:
+            print("file open failed")
+            exit(1)
+
+        # read words
+        for num in f:
+            self.append(num)
+
+    def printdata(self):
+
+        print("items in the list are ")
+        for item in self:
+            print(item)
+
+        print("items in the klist are")
+        for item in self.klist:
+            print(item)
+
+    def insertklist(self, newitem):
+        # list is full?
+        if (len(self.klist) == self.kvalue and self.klist[self.kvalue-1] < newitem):
+            return
+        else:
+            index = 0
+            for item in self.klist :
+                if item > newitem:
+                    break
+                else:
+                    index = index+1
+            self.klist.insert(index, newitem)
+
+        if(len(self.klist) > self.kvalue):
+            self.klist.pop(self.kvalue)
+
+    def findkmin(self):
+        if (len(self) < self.kvalue):
+            return None
+        else:
+            for item in self:
+                self.insertklist(item)
+            return self.klist[self.kvalue-1]
 
 
-if __name__ == "__main__":
-    str1 = "2293049o055776276122-059068607867874860-60940487827628a78478876969708t0-78-08-50498398201u9182a989o85095079089-"
+def readk():
+    line = input("Please enter K value:")
+    try:
+        k = int(line)
+    except:
+        print("invalid K value entered")
+        exit(1)
+    else:
+        return k
 
-    sd1 = stringdups(str1)
-    print("DUPS1 = {}".format(sd1.finddups()))
 
-    str2 = ""
+if __name__ == '__main__':
 
-    sd2 = stringdups(str2)
-    print("DUPS2 = {}".format(sd2.finddups()))
+    #kvalue = readk()
+    #print('k value is', kvalue)
+
+    #dl = datalist()
+    #dl.readdata()
+    #dl.printdata()
+
+    dl1 = datalist(100, (1,9,7,8,2,3,5,5,3,3,2,1,43,35,5,45,0,213,12))
+    print("TEST#1 - kmin=", dl1.findkmin())
+
+    dl2 = datalist(5, (10,100,78,9,7,8,2,3,5,5,3,3,2,1,43,35,5,45,0,213,12))
+    print("TEST#2 - kmin=", dl2.findkmin())
+    dl2.printdata()
+
+    #kval = readk()
+
+    #print("K is =", kval)
+
+

@@ -1,4 +1,4 @@
-# Find the kth minimum of a list
+# This script clones an undirected graph represented with a label and list of neighboring nodes
 #
 # This script is a part of the Easy Python project which creates a number
 # sample python scripts to answer simple programming questions. The
@@ -18,96 +18,145 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
+class gnode_list():
+    def __init__(self, nlist, llist):
+        self.nlist = nlist
+        self.llist = llist
+        self.nodes = dict()
+        self.links = []
+        self.create_nodes()
+        self.create_links()
 
-import sys
-class datalist(list):
+    def create_nodes(self):
+        for each in self.nlist:
+            if each not in self.nodes:
+                ug = gnode(each)
+                self.nodes[each] = ug
 
-    def __init__(self, k, alist):
-        self.fname = ""
-        self.kvalue = k
-        super().__init__(alist)
-        self.klist = []
+    def create_links(self):
+        for each in self.llist:
+            if(each[0] and each[1] and each[0] in self.nodes and each[1] in self.nodes):
+                # print("creating a link between {} and {}".format(each[0], each[1]))
+                e0 = self.nodes[each[0]]
+                e1 = self.nodes[each[1]]
+                self.link_ugraphs(e0, e1)
+                self.links.append([e0, e1])
 
-    def readdata(self):
-        print("Please enter the data file name:")
-        for self.fname in sys.stdin:
-            break
+    def print_nodes(self):
+        print("PRINTING NODES")
+        for each in self.nodes.values():
+            each.print_node()
 
-        try:
-            # open file
-            f = open(self.fname.rstrip())
-        except:
-            print("file open failed")
-            exit(1)
+        print("PRINTING LINKS")
+        for each in self.links:
+            print("nodeA = {} nodeA.label = {}, nodeB = {} nodeB.label = {}".
+                  format(each[0], each[0].label, each[1], each[1].label))
 
-        # read words
-        for num in f:
-            self.append(num)
+    def link_ugraphs (self, ga, gb):
+        ga.add_neigh(gb)
+        gb.add_neigh(ga)
 
-    def printdata(self):
+    def unlink_ugraphs (self, ga, gb):
+        ga.delete_neigh(gb)
+        gb.delete_neigh(ga)
 
-        print("items in the list are ")
-        for item in self:
-            print(item)
+    def get_node(self, label):
+        node = None
+        if label in self.nodes:
+            node = self.nodes[label]
+        return node
+#
+# this class is used to clone an undirected graph from a node in the graph
+# note that this function does not utilize gnode_list graph on purpose
+#
+class clone_ugraph():
+    def __init__(self, anode):
+        self.nodes = dict()
+        self.cnode = self.clone_ugraph(anode)
+        self.pnodes = dict() # used during printing the nodes
 
-        print("items in the klist are")
-        for item in self.klist:
-            print(item)
-
-    def insertklist(self, newitem):
-        # list is full?
-        if (len(self.klist) == self.kvalue and self.klist[self.kvalue-1] < newitem):
-            return
+    def clone_ugraph(self, anode):
+        bnode = None
+        if(anode.label not in self.nodes):
+            bnode = gnode(anode.label)
+            # save the orig node and clone in the nodes dict
+            self.nodes[anode.label] = [anode, bnode]
+            for each in anode.neigh:
+                bneigh = self.clone_ugraph(each)
+                bnode.add_neigh(bneigh)
         else:
-            index = 0
-            for item in self.klist :
-                if item > newitem:
-                    break
-                else:
-                    index = index+1
-            self.klist.insert(index, newitem)
+            # retrieve the bnode saved in the nodes dict
+            bnode = self.nodes[anode.label][1]
+        return bnode
 
-        if(len(self.klist) > self.kvalue):
-            self.klist.pop(self.kvalue)
+    def print_cnode(self, cnode):
 
-    def findkmin(self):
-        if (len(self) < self.kvalue):
-            return None
+        if cnode.label not in self.pnodes:
+            self.pnodes[cnode.label] = cnode
+            cnode.print_node()
+            for each in cnode.neigh:
+                self.print_cnode(each)
+
+    def print_clone(self):
+        print("PRINTING CLONED NODES")
+        self.pnodes = dict()
+        self.print_cnode(self.cnode)
+
+    def get_clone(self):
+        return self.cnode
+
+class gnode():
+    def __init__(self, label):
+        self.label = label
+        self.neigh = []
+
+    def add_neigh(self, neigh):
+        if type(neigh) == gnode and neigh not in self.neigh:
+            self.neigh.append(neigh)
         else:
-            for item in self:
-                self.insertklist(item)
-            return self.klist[self.kvalue-1]
+            print("add_neigh: incorrect type")
 
+    def delete_neigh(self, neigh):
+        if type(neigh) == gnode and neigh in self.neigh:
+            self.neigh.remove(neigh)
+        else:
+            print("delete_neigh: incorrect type")
 
-def readk():
-    line = input("Please enter K value:")
-    try:
-        k = int(line)
-    except:
-        print("invalid K value entered")
-        exit(1)
-    else:
-        return k
+    def print_node(self):
+        neighs = ""
+        for each in self.neigh:
+            neighs += each.label + ","
+        if(len(neighs)):
+            neighs = neighs[:-1]
+        print("node: {}, label: {}, neighs: {}".format(self, self.label, neighs))
 
+if __name__ == "__main__":
 
-if __name__ == '__main__':
+    nlist = ["a", "b", "c", "d", "e", "f"]
+    llist = [["a", "b"], ["a", "c"], ["c", "d"], ["c", "f"], ["d", "f"]]
 
-    #kvalue = readk()
-    #print('k value is', kvalue)
+    gnl = gnode_list(nlist, llist)
+    gnl.print_nodes()
 
-    #dl = datalist()
-    #dl.readdata()
-    #dl.printdata()
+    anode = gnl.get_node("a")
+    cug = clone_ugraph(anode)
+    # note that "e" is not printed since it is not connected to the cluster which was cloned
+    cug.print_clone()
 
-    dl1 = datalist(100, (1,9,7,8,2,3,5,5,3,3,2,1,43,35,5,45,0,213,12))
-    print("TEST#1 - kmin=", dl1.findkmin())
+    nlist = ["a", "b", "c", "d", "e", "f", "g", "h", "i"]
+    llist = [["a", "b"], ["a", "c"], ["c", "d"], ["c", "f"], ["d", "f"], ["e", "g"], ["h", "i"], ["g", "h"]]
 
-    dl2 = datalist(5, (10,100,78,9,7,8,2,3,5,5,3,3,2,1,43,35,5,45,0,213,12))
-    print("TEST#2 - kmin=", dl2.findkmin())
-    dl2.printdata()
+    gnl = gnode_list(nlist, llist)
+    gnl.print_nodes()
 
-    #kval = readk()
+    anode = gnl.get_node("a")
+    cug = clone_ugraph(anode)
+    # note that "e", "g", "h", "i" are not printed since it is not connected to the cluster which was cloned
+    cug.print_clone()
 
-    #print("K is =", kval)
+    anode = gnl.get_node("g")
+    cug = clone_ugraph(anode)
+    # note that "a", "b", "c", "d", "f" are not printed since it is not connected to the cluster which was cloned
+    cug.print_clone()
 
 

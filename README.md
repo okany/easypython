@@ -2,14 +2,14 @@
 
 ### Simple python scripts solving well known programming interview questions
 
-* test1 - finds the kth minimum number in a list
-* test2 - implements preorder, inorder, and postorder traversal of a binary tree with and without using recursion 
+* test1 - clones an undirected graph represented with a label and list of neighboring nodes
+* test2 - implements preorder, inorder, and postorder traversals of a binary tree with and without using recursion 
 * test3 - finds the best time to buy and sell a stock once or unlimited times or fix number of times to make the maximum profit
 * test4 - recovers a binary search tree with 2 replaced nodes
 * test5 - implements a search typehead
 * test6 - implements bubble sort, insertion sort, quick sort, merge sort, and bucket sort algorithms
 * test7 - finds the largest rectangle in a histogram
-* test8 - finds duplicate characters in a string
+* test8 - finds the kth minimum number in a list
 * test9 - determines if two strings are anagram or not
 * test10 - prints the first non-repeated character from a string
 * test11 - reverses a string by using recursion
@@ -18,7 +18,7 @@
 * test14 - removes duplicate entries in a list
 * test15 - checks if 2 strings are rotation of each other
 * test16 - reverses words in a given sentence without using any library method
-* test17 - finds the nth node from the end in a singly linked list
+* test17 - finds the nth node from the end in a singly linked list in one pass
 * test18 - creates a list with only unique items
 * test19 - finds all combinations of a string
 * test20 - checks if a string is a palindrome
@@ -52,3 +52,4 @@
 * test48 - finds all unique permutations of a list of numbers
 * test49 - evaluates an expression in reverse polish notation
 * test50 - finds contiguous subarray within an array, A of length N which has the largest sum
+* test51 - finds duplicate characters in a string
