@@ -53,3 +53,4 @@
 * test49 - evaluates an expression in reverse polish notation
 * test50 - finds contiguous subarray within an array, A of length N which has the largest sum
 * test51 - finds duplicate characters in a string
+* test52 - finds if parentheses are balanced in a string
