@@ -54,3 +54,4 @@
 * test50 - finds contiguous subarray within an array, A of length N which has the largest sum
 * test51 - finds duplicate characters in a string
 * test52 - finds if parentheses are balanced in a string
+* test53 - generates all combinations of n pairs of well-formed parentheses

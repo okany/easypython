@@ -24,24 +24,24 @@ class parentheses(str):
         super().__init__()
         self.open = "("
         self.close = ")"
-        self.numofparan = 0
+        self.numofparen = 0
         self = astr
 
     def isBalanced(self):
-        self.numofparan = 0
+        self.numofparen = 0
         retval = False
         for char in self:
             if char == self.open:
-                self.numofparan += 1
+                self.numofparen += 1
             elif char == self.close:
-                self.numofparan -= 1
+                self.numofparen -= 1
             else:
                 pass # skip if not a paran
 
-            if self.numofparan < 0:
+            if self.numofparen < 0:
                 break # return False
 
-        if self.numofparan == 0:
+        if self.numofparen == 0:
             retval = True
 
         return retval
