@@ -55,3 +55,4 @@
 * test51 - finds duplicate characters in a string
 * test52 - finds if parentheses are balanced in a string
 * test53 - generates all combinations of n pairs of well-formed parentheses
+* test54 - finds Fibonacci numbers for a given positive integer
