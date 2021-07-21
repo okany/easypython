@@ -55,4 +55,6 @@
 * test51 - finds duplicate characters in a string
 * test52 - finds if parentheses are balanced in a string
 * test53 - generates all combinations of n pairs of well-formed parentheses
-* test54 - finds Fibonacci numbers for a given positive integer
+* test54 - finds Fibonacci numbers for a given positive integer (finds the Fibonacci of 10M on a Mac with 32GB memory)
+* test55 - rearranges a list such that A[i] becomes A[A[i]] where A[i] has N elements such that 0<=A[i]<=N-1
+* test56 - rotates a matrix 90 degrees clockwise without using another matrix
