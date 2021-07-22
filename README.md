@@ -58,3 +58,6 @@
 * test54 - finds Fibonacci numbers for a given positive integer (finds the Fibonacci of 10M on a Mac with 32GB memory)
 * test55 - rearranges a list such that A[i] becomes A[A[i]] where A[i] has N elements such that 0<=A[i]<=N-1
 * test56 - rotates a matrix 90 degrees clockwise without using another matrix
+* test57 - finds a substring in a string
+* test58 - converts an integer N into a roman numeral where 1 < N < 4000
+* test59 - converts a JSON string into prettyJSON format
