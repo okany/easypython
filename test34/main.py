@@ -32,6 +32,10 @@ class subsinstring():
         if(len(sublist) == 0):
             raise ValueError
         self.sublen = len(sublist[0])
+        # first find all substrings in the string and create a dictionary
+        # with the index of the start of the substring in the string
+        # each substring is unique and has the same length, so that
+        # there is no need to worry about substring of substrings
         for each in sublist:
             if(len(each) != self.sublen) or each in self.subset:
                 raise ValueError
@@ -45,6 +49,7 @@ class subsinstring():
                 if(ind >= 0):
                     offset = offset+ind
                     # print("found {} in {} at position {}".format(each, self.str, offset))
+                    # calculate the correct index and use it as the key of the dictionary
                     self.subdict[offset] = each
                     offset = offset+1
                     part = str(part[ind+1:])
@@ -57,9 +62,11 @@ class subsinstring():
         # check if you can find a substring of combination of all substrings in the string
         for index in range(len(self.str)):
             subindex = index
+            # keep the substrings found in the dictionary in the right position in used set
             used = set()
             while subindex < len(self.str):
                 substr = self.subdict.get(subindex)
+                # keep looking for substrings until you miss one or finish the string
                 if substr and substr not in used:
                     used.add(substr)
                     subindex += self.sublen
