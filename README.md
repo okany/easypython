@@ -62,3 +62,4 @@
 * test58 - converts an integer N into a roman numeral where 1 < N < 4000
 * test59 - converts a JSON string into prettyJSON format
 * test60 - finds if the list A with sorted integers have 2 indices such that A[i] - A[j] = k where k is a positive integer and i != j
+* test61 - finds 3 numbers with a sum closest to a given integer T in a list of integers S
