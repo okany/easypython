@@ -1,4 +1,4 @@
-# How do you reverse words in a given sentence without using any library method
+# This script reverses words in a given sentence without using any library method
 #
 # This script is a part of the Easy Python project which creates a number
 # sample python scripts to answer simple programming questions. The
