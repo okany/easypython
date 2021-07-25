@@ -68,3 +68,4 @@
 * test64 - sorts a list of colors 0, 1, and 2 in minimum number of swaps (O(N) complexity)
 * test65 - computes and returns the square root of integer A as floor(sqrt(A)) where 1<=A<=10^9
 * test66 - calculates the nth integer in "count and say" list
+* test67 - adds two binary strings
