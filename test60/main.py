@@ -23,12 +23,16 @@ class diffk(list):
     def __init__(self, alist):
         super().__init__(alist)
 
+    '''
+        @@num k value - this function searches for two elements with difference k (num)
+        returns 1 if there are two items which diff = k and 0 otherwise
+    '''
     def get_pos_diff(self, num):
         if len(self) < 2:
             return 0
         lower = 1
         for i in range(len(self)):
-            j = lower
+            j = max(lower, i+1)
             while j < len(self):
                 dif = abs(self[j] - self[i]) # can be sorted ascending or descending abs covers both
                 # print ("i = {} j = {} lower = {} dif = {} num = {}".format(i, j, lower, dif, num))
