@@ -66,3 +66,4 @@
 * test62 - implements eval function for arithmetic operands *,/,+,-
 * test63 - finds all unique paths in a grid of MxN size between points (1,1) and (M,N)
 * test64 - sorts a list of colors 0, 1, and 2 in minimum number of swaps (O(N) complexity)
+* test65 - Computes and returns the square root of integer A as floor(sqrt(A)) where 1<=A<=10^9
