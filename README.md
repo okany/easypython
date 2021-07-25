@@ -64,3 +64,4 @@
 * test60 - finds if the list A with sorted integers have 2 indices such that A[i] - A[j] = k where k is a positive integer and i != j
 * test61 - finds 3 numbers with a sum closest to a given integer T in a list of integers S
 * test62 - implements eval function for arithmetic operands *,/,+,-
+* test63 - finds all unique paths in a grid of MxN size between points (1,1) and (M,N)
