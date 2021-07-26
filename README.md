@@ -69,3 +69,4 @@
 * test65 - computes and returns the square root of integer A as floor(sqrt(A)) where 1<=A<=10^9
 * test66 - calculates the nth integer in "count and say" list
 * test67 - adds two binary strings
+* test68 - finds the length of the shortest string to be appended to turn a string into a palindrome
