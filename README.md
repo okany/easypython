@@ -70,3 +70,4 @@
 * test66 - calculates the nth integer in "count and say" list
 * test67 - adds two binary strings
 * test68 - finds the length of the shortest string to be appended to turn a string into a palindrome
+* test69 = matches two regular expression strings
