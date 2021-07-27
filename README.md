@@ -72,3 +72,4 @@
 * test68 - finds the length of the shortest string to be appended to turn a string into a palindrome
 * test69 - matches two regular expression strings
 * test70 - finds all possible letter combinations of for digits dialed on a letter phone
+* test71 - finds sliding window maximums of an integer array
