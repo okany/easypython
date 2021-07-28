@@ -74,3 +74,4 @@
 * test70 - finds all possible letter combinations of for digits dialed on a letter phone
 * test71 - finds sliding window maximums of an integer array
 * test72 - finds all permutations of items in a list
+* test73 - solves gas station problem
