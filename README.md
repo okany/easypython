@@ -76,3 +76,4 @@
 * test72 - finds all permutations of items in a list
 * test73 - solves gas station problem
 * test74 - finds the maximum length of list of disjoint intervals for a given list of intervals
+* test75 - finds the majority element in a list
