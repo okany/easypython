@@ -23,14 +23,15 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 def circular_trip(listA, listB):
-    cost = minc = maxc = 0
-    firstmin = firstmax = 0
-    start = -1
+    total = thiscost = cost = mincost = minstart = 0
+    total = 0
     # determine the final cost of each trip (A[i]-B[i+1]
     for station in range(len(listA)):
 
         # calculate the gas obtained from this station - trip to next
         thiscost = listA[station] - listB[station]
+        total += thiscost
+
         # check if this is a local minima or local maxima
         if (cost * thiscost < 0):
             # reset the cost counter
@@ -38,34 +39,13 @@ def circular_trip(listA, listB):
         else:
             cost += thiscost
 
-        if thiscost < 0:
-            # set the starting station to be used later
-            start = station
         # sort the negative costs in a list
-        if cost > maxc:
-            maxstart = start + 1
-            maxc = cost
-        minc = min(minc, cost)
+        if cost < mincost:
+            minstart = (station + 1) % len(listA)
+            mincost = cost
 
-        # save the min as the first minimum to add it to last min for circular operation
-        if maxc == 0:
-            firstmin = minc
-        # save the last min as the first maximum to add it the last max for circular operation
-        elif minc == 0:
-            firstmax = maxc
-        # print("station={} minc{} maxc{}".format(station, minc, maxc))
-
-    if cost > 0:
-        cost += firstmax
-        if cost > maxc:
-            maxstart = start + 1
-            maxc = cost
-    elif cost < 0:
-        cost += firstmin
-        minc = min(cost, minc)
-
-    if minc + maxc >= 0:
-        return (maxstart % len(listA))
+    if total >= 0:
+        return minstart
     else:
         return -1
 
@@ -93,5 +73,11 @@ if __name__=="__main__":
     tno +=1
     alist = [0, 2, 1, 3, 2, 1, 2, 2]
     blist = [1, 1, 1, 2, 1, 4, 2, 1]
+    print("TEST#{} - Gas amounts A={} and trip costs B={} circular trip starting from station {}".
+          format(tno, alist, blist, circular_trip(alist, blist)))
+
+    tno +=1
+    alist = [9, 2, 1, 3, 4, 1, 2, 2]
+    blist = [1, 3, 1, 4, 5, 4, 3, 3]
     print("TEST#{} - Gas amounts A={} and trip costs B={} circular trip starting from station {}".
           format(tno, alist, blist, circular_trip(alist, blist)))
