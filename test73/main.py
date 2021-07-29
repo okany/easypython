@@ -81,3 +81,9 @@ if __name__=="__main__":
     blist = [1, 3, 1, 4, 5, 4, 3, 3]
     print("TEST#{} - Gas amounts A={} and trip costs B={} circular trip starting from station {}".
           format(tno, alist, blist, circular_trip(alist, blist)))
+
+    tno +=1
+    alist = [9, 2, 1, 3, 4, 1, 2, 2]
+    blist = [1, 3, 1, 4, 5, 4, 3, 4]
+    print("TEST#{} - Gas amounts A={} and trip costs B={} circular trip starting from station {}".
+          format(tno, alist, blist, circular_trip(alist, blist)))
