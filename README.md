@@ -3,15 +3,15 @@
 ### Simple python scripts solving well known programming interview questions
 
 * test1 - clones an undirected graph represented with a label and list of neighboring nodes
-* test2 - implements preorder, inorder, and postorder traversals of a binary tree with and without using recursion 
+* test2 - solves NQueens puzzle which is the problem of placing n queens on an n×n chessboard such that no two queens attack each other 
 * test3 - finds the best time to buy and sell a stock once or unlimited times or fix number of times to make the maximum profit
 * test4 - recovers a binary search tree with 2 replaced nodes
 * test5 - implements a search typehead
-* test6 - implements bubble sort, insertion sort, quick sort, merge sort, and bucket sort algorithms
+* test6 - implements preorder, inorder, and postorder traversals of a binary tree with and without using recursion
 * test7 - finds the largest rectangle in a histogram
 * test8 - finds the kth minimum number in a list
 * test9 - determines if two strings are anagram or not
-* test10 - prints the first non-repeated character from a string
+* test10 - implements bubble sort, insertion sort, quick sort, merge sort, and bucket sort algorithms
 * test11 - reverses a string by using recursion
 * test12 - finds the median of an array which is created by merging two sorted arrays in O(log n+m)
 * test13 - implements a simple vending machine
@@ -77,3 +77,4 @@
 * test73 - solves gas station problem
 * test74 - finds the maximum length of list of disjoint intervals for a given list of intervals
 * test75 - finds the majority element in a list
+* test76 - prints the first non-repeated character from a string

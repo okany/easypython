@@ -1,4 +1,4 @@
-# This script implements bubble sort, insertion sort, quick sort, merge sort, and bucket sort algorithms
+# This script implements preorder, inorder, and postorder traversal of a binary tree with and without using recursion
 #
 # This script is a part of the Easy Python project which creates a number
 # sample python scripts to answer simple programming questions. The
@@ -19,149 +19,185 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 
-class slist(list):
-
-    def __init__(self, slist):
-        super().__init__(slist)
-        self.blist = slist
-        self.ilist = slist
-        self.bclist = []
-
-    def bubblesort(self):
-        last = len(self) - 1
-        while last > 0:
-            for i in range(last):
-                if self.blist[i] > self.blist[i+1]:
-                    temp = self.blist[i]
-                    self.blist[i] = self.blist[i+1]
-                    self.blist[i+1] = temp
-            last = last - 1
-        return self.blist
-
-    def insertionsort(self):
-        last = len(self)
-        first = 0
-        while first < last:
-            min = self.ilist[first]
-            mindex = first
-            for i in range(first+1, last):
-                if self.ilist[i] < min:
-                    min = self.ilist[i]
-                    mindex = i
-            if(mindex != first):
-                self.ilist.pop(mindex)
-                self.ilist.insert(0,min)
-            first = first + 1
-
-        return self.ilist
-
-    def findminmax(self):
-        min = max = self[0]
-        for each in self:
-            if each < min:
-                min = each
-            elif each > max:
-                max = each
-        return min, max
-
-    def bucketsort(self, k):
-        if(len(self)<=1): return self
-        min, max = self.findminmax()
-        bucket = []
-        bsize = int((max - min)/k)+1
-        for i in range(k):
-            bucket.append([])
-        for each in self:
-            bucket[int((each-min)/bsize)].append(each)
-
-        for i in range(k):
-            alist = slist(bucket[i])
-            self.bclist.extend(alist.insertionsort())
-
-        return self.bclist
-
-
-def partition(list, pi):
-    low = []
-    high = []
-    for i in range(len(list)):
-        if i == pi: pass
-        elif list[i] > list[pi]:
-            high.append(list[i])
-        else:
-            low.append(list[i])
-    return low, high
-
-def quicksort(list):
-    if(list == None): return None
-    elif(len(list) <= 1):
-        return list
+def create_tree(alist):
+    if alist == None: return None
     else:
-        low, high = partition(list, 0)
-        # print("low = {}, pivot = {}, high = {}".format(low, list[0], high))
-        qlist = quicksort(low)
-        qlist.append(list[0])
-        qlist.extend(quicksort(high))
+        bt = btree(alist[0])
+        for item in alist[1:]:
+            bt.insert(item)
+    return bt
 
-    return qlist
+class btree():
 
-def mergesort(list):
-    if list == None: return None
-    elif(len(list) <=1): return list
-    else:
-        mid = int(len(list)/2)
-        alist = list[:mid]
-        blist = list[mid:]
-        amlist = mergesort(alist)
-        bmlist = mergesort(blist)
-        i = j = 0
-        mlist = []
-        while(i<len(amlist) and j<len(bmlist)):
-            if(amlist[i]<bmlist[j]):
-                mlist.append(amlist[i])
-                i = i + 1
+    def __init__(self, data):
+        self.data = data
+        self.left = None
+        self.right = None
+
+    def insert(self, data):
+        if self.data == data:
+            pass # duplicate - don't insert
+        elif self.data > data:
+            if(self.left == None):
+                # create a new node as a left child
+                self.left = btree(data)
             else:
-                mlist.append(bmlist[j])
-                j = j + 1
-        mlist.extend(amlist[i:])
-        mlist.extend(bmlist[j:])
+                # insert to left branch
+                self.left.insert(data)
+        else:
+            if(self.right == None):
+                # create a new node as a right child
+                self.right = btree(data)
+            else:
+                # insert to right branch
+                self.right.insert(data)
 
-    return mlist
+    def find(self, data):
+        if self.data == data:
+            return data # we found it
+        elif self.data > data:
+            if(self.left == None):
+                return None # does not exists
+            else:
+                # search in the left branch
+                return self.left.find(data)
+        else:
+            if(self.right == None):
+                return None # does not exists
+            else:
+                # search in the right branch
+                return self.right.find(data)
 
-if __name__ == '__main__':
-    al = slist([1, 2, 30, 4, 60, 34, 12, -1, 5, 23, 67, 35, 4, 99, -20, -45, 89, 78])
+    def inorder_list(self):
+        ilist = []
+        if(self.left != None):
+            ilist.extend(self.left.inorder_list())
+        ilist.append(self.data)
+        if(self.right != None):
+            ilist.extend(self.right.inorder_list())
 
-    print("\nOriginal list         = ", al)
-    print("Bubble sorted list    = ", al.bubblesort())
-    print("Insertion sorted list = ", al.insertionsort())
-    print("Quick sorted list     = ", quicksort(al))
-    print("Merge sorted list     = ", mergesort(al))
-    print("Bucket sorted list    = ", al.bucketsort(5))
+        return(ilist)
 
-    al2 = slist([])
 
-    print("\nOriginal list         = ", al2)
-    print("Bubble sorted list    = ", al2.bubblesort())
-    print("Insertion sorted list = ", al2.insertionsort())
-    print("Quick sorted list     = ", quicksort(al2))
-    print("Merge sorted list     = ", mergesort(al2))
-    print("Bucket sorted list    = ", al2.bucketsort(3))
+    def nr_inorder_list(self):
+        ilist = [self]
+        item = self
+        i = 0
+        leftdone = False
+        while True:
+            if(leftdone == False and item.left != None):
+                ilist.insert(i, item.left)
+                item = item.left
+            elif (item.right != None):
+                i = i + 1
+                ilist.insert(i, item.right)
+                # evaluate the right branch
+                item = item.right
+                leftdone = False
+            else:
+                i = i + 1
+                if(i<len(ilist)):
+                    # move to the parent node to look for right branch
+                    item = ilist[i]
+                    # don't search the left branch on the parent node
+                    leftdone = True
+                else:
+                    #this is the rightmost item so stop the search
+                    break
+        dlist = []
+        for item in ilist:
+            # create the data list from list of linked list items
+            dlist.append(item.data)
 
-    al3 = slist([1])
+        return dlist
 
-    print("\nOriginal list         = ", al3)
-    print("Bubble sorted list    = ", al3.bubblesort())
-    print("Insertion sorted list = ", al3.insertionsort())
-    print("Quick sorted list     = ", quicksort(al3))
-    print("Merge sorted list     = ", mergesort(al3))
-    print("Bucket sorted list    = ", al3.bucketsort(7))
+    def nr_preorder_list(self):
+        ilist = [self]
+        item = self
+        i = 0
+        while True:
+            if(item.right != None):
+                # insert the right node
+                ilist.insert(i+1, item.right)
+            if (item.left != None):
+                # insert the left node before the right node
+                ilist.insert(i+1, item.left)
+            i = i + 1 # move pointer to the next node
+            if(i<len(ilist)):
+                # move to the next node in the list
+                item = ilist[i]
+            else:
+                # this is the rightmost item so stop the search
+                break
 
-    al4 = slist([10, 1])
+        dlist = []
+        for item in ilist:
+            # create the data list from list of linked list items
+            dlist.append(item.data)
 
-    print("\nOriginal list         = ", al4)
-    print("Bubble sorted list    = ", al4.bubblesort())
-    print("Insertion sorted list = ", al4.insertionsort())
-    print("Quick sorted list     = ", quicksort(al4))
-    print("Merge sorted list     = ", mergesort(al4))
-    print("Bucket sorted list    = ", al4.bucketsort(2))
+        return dlist
+
+    def nr_postorder_list(self):
+        ilist = [self]
+        item = self
+        i = 0
+        while True:
+            if (item.left != None):
+                # insert the left
+                ilist.insert(i, item.left)
+                i = i + 1 # move the pointer back to the parent node
+            if(item.right != None):
+                # insert the right node
+                ilist.insert(i, item.right)
+                i = i + 1 # move the pointer back to the parent node
+
+            i = i - 1 # move pointer to the previous node
+            if(i>=0):
+                # move to the previous node in the list
+                item = ilist[i]
+            else:
+                # this is the leftmost item so stop the search
+                break
+
+        dlist = []
+        for item in ilist:
+            # create the data list from list of linked list items
+            dlist.append(item.data)
+
+        return dlist
+
+    def preorder_list(self):
+        plist = [self.data]
+        if(self.left != None):
+            plist.extend(self.left.preorder_list())
+        if(self.right != None):
+            plist.extend(self.right.preorder_list())
+
+        return(plist)
+
+    def postorder_list(self):
+        plist = []
+        if (self.left != None):
+            plist.extend(self.left.postorder_list())
+        if (self.right != None):
+            plist.extend(self.right.postorder_list())
+        plist.append(self.data)
+
+        return (plist)
+
+if __name__ == "__main__":
+
+    al = [1, 2, 30, 4, 60, 34, 12, -1, 5, 23, 67, 35, 4, 99, -20, -45, 89, 78]
+    bt = create_tree(al)
+
+    print("     list is                        : {}".format(al))
+    print("     inorder list is                : {}".format(bt.inorder_list()))
+    print("     nonrecursive inorder list is   : {}".format(bt.nr_inorder_list()))
+    print("     preorder list is               : {}".format(bt.preorder_list()))
+    print("     nonrecursive preeorder list is : {}".format(bt.nr_preorder_list()))
+    print("     postorder list is              : {}".format(bt.postorder_list()))
+    print("     nonrecursive postorder list is : {}".format(bt.nr_postorder_list()))
+
+
+
 
