@@ -78,3 +78,4 @@
 * test74 - finds the maximum length of list of disjoint intervals for a given list of intervals
 * test75 - finds the majority element in a list
 * test76 - prints the first non-repeated character from a string
+* test77 - finds the minimum number of cuts to create palindromes from a string

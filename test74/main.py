@@ -25,6 +25,7 @@ class intervals():
         self.intcnt = [[i,0, list()] for i in range(len(self.ints))]
         self.int_list = list()
         self.disints = list()
+        self.debug = False
 
     def set_inter_count(self, i):
         for j in range(i+1, len(self.ints)):
@@ -58,11 +59,13 @@ class intervals():
             if(self.intcnt[other][1] == 0):
                 self.disints.append(self.ints[self.intcnt[other][0]])
                 self.int_list.remove(self.intcnt[other])
-        # print("item={}".format(item))
+        if self.debug:
+            print("item={}".format(item))
         self.int_list.remove(item)
         return
 
-    def find_disjoint_intervals(self):
+    def find_disjoint_intervals(self, debug = False):
+        self.debug = debug
         self.disints = list()
         for i in range(len(self.ints)):
             # count the number of intersections
@@ -72,13 +75,15 @@ class intervals():
             else:
                 self.insert_inter_list(self.intcnt[i])
 
-        # print("self.intcnt={}".format(self.intcnt))
-        # print("self.inter_list={}".format(self.int_list))
+        if self.debug:
+            print("self.intcnt={}".format(self.intcnt))
+            print("self.inter_list={}".format(self.int_list))
 
         item = self.find_max_inter()
         while item != None:
             self.remove_inter_list(item)
-            # print("self.inter_list={}".format(self.int_list))
+            if self.debug:
+                print("self.inter_list={}".format(self.int_list))
             item = self.find_max_inter()
 
         return self.disints
@@ -87,17 +92,18 @@ if __name__=="__main__":
 
     tno = 0
     tno += 1
+    debug = True
     alist = [[1,3],[2,5],[3,6],[5,9],[10,12],[12,15],[14,19],[20, 22]]
     aint = intervals(alist)
-    print("TEST#{} - for alist={} disjoint intervals={}".format(tno, alist, aint.find_disjoint_intervals()))
+    print("TEST#{} - for alist={} disjoint intervals={}".format(tno, alist, aint.find_disjoint_intervals(debug)))
 
     tno += 1
     alist = [[1, 3], [4, 5], [5, 8], [6, 8], [7, 8], [8, 9], [9, 12], [10, 14]]
     aint = intervals(alist)
-    print("TEST#{} - for alist={} disjoint intervals={}".format(tno, alist, aint.find_disjoint_intervals()))
+    print("TEST#{} - for alist={} disjoint intervals={}".format(tno, alist, aint.find_disjoint_intervals(debug)))
 
     tno += 1
     alist = [[1, 3], [4, 5], [5, 6], [6, 7], [7, 8], [8, 9], [9, 12], [10, 14], [15, 17], [18, 19]]
     aint = intervals(alist)
-    print("TEST#{} - for alist={} disjoint intervals={}".format(tno, alist, aint.find_disjoint_intervals()))
+    print("TEST#{} - for alist={} disjoint intervals={}".format(tno, alist, aint.find_disjoint_intervals(debug)))
 
