@@ -79,3 +79,4 @@
 * test75 - finds the majority element in a list
 * test76 - prints the first non-repeated character from a string
 * test77 - finds the minimum number of cuts to create palindromes from a string
+* test78 - script solves the word break problem which determines if a string consists of substrings all found in a dictionary
