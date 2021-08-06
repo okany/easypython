@@ -81,3 +81,4 @@
 * test77 - finds the minimum number of cuts to create palindromes from a string
 * test78 - solves the word break problem which determines if a string consists of substrings all found in a dictionary
 * test79 - finds the size of the largest rectangle in a binary matrix in O(NxN) time complexity
+* test80 - inserts a new interval into a list of intervals which are non-overlapping and sorted based on start times
