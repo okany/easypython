@@ -84,3 +84,4 @@
 * test80 - inserts a new interval into a list of intervals which are non-overlapping and sorted based on start times
 * test81 - finds the minimum number of steps to convert string A into string B 
 * test82 - cuts a rod from the weak points of the rod in an order to minimize the rod cutting cost where cutting each rod costs the length of the rod
+* test83 - distributes minimum number of candies to N children each with a priority
