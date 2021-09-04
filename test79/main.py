@@ -1,4 +1,4 @@
-# This script finds the size of the largest rectangle in a binary matrix in O(NxN) time complexity
+# This script finds the size of the largest rectangle in a binary matrix
 #
 # This script is a part of the Easy Python project which creates a number
 # sample python scripts to answer simple programming questions. The
@@ -21,30 +21,11 @@
 class matrix(list):
     def __init__(self, alist):
         super().__init__(alist)
-        self.matrix = list()
-        self.n = 0
-        self.m = 0
-        self.create_matrix()
+        self.n = len(self)
+        self.m = len(self[0])
         self.pairs = list()
         self.maxrect = 0
         self.intpairs = list()
-
-    def create_matrix(self):
-        self.n = len(self)
-        if(self.n>0):
-            self.m = len(self[0])
-
-        # create a boundary lines around the input matrix
-        for y in range(self.n+2):
-            row = list()
-            for x in range(self.m+2):
-                if (y == 0 or x == 0 or y == self.n+1 or x == self.m+1):
-                    row.append(0)
-                else:
-                    row.append(self[y-1][x-1])
-            if len(row) != self.m+2:
-                raise(ValueError)
-            self.matrix.append(row)
 
     def find_intersects(self, list1, list2):
         i = j = 0
@@ -72,35 +53,40 @@ class matrix(list):
         return intlist, maxrec
 
     # this function preclaculates the intersections of partial matrices which will be
-    # reused during the largest rectangle calculation. This matrix reduces the complexity
-    # of the algorithm to O(NxN)
+    # reused during the largest rectangle calculation.
     def create_int_pairs(self, debug = False):
         self.intpairs = list()
         for i in range(self.n):
-            self.intpairs.append(self.pairs[i].copy())
+            plist = list()
+            for j in range(self.n):
+                plist.append(self.pairs[i].copy())
+            self.intpairs.append(plist)
 
-        i = self.n - 1
-        if debug:
-            print("int pairs {} = {}".format(i, self.pairs[i]))
-        while i > 0:
-            self.pairs[i-1], maxint = self.find_intersects(self.pairs[i - 1], self.pairs[i])
-            if debug:
-                print("int pairs {} = {}".format(i, self.pairs[i]))
-            i -= 1
+        for j in range(self.n - 1, -1, -1):
+            i = j
+            while i > 0:
+                self.intpairs[j][i-1], maxint = self.find_intersects(self.pairs[i - 1], self.intpairs[j][i])
+                if debug:
+                    print("int pairs (i,j)=({},{}) is {}".format(i, j, self.intpairs[j][i]))
+                i -= 1
 
     def largest_rect(self, debug = False):
-        # iterate over each row to define the top edge of hte rectangle
-        for y in range(1, self.n+2):
+        # iterate over each row to define the top edge of the rectangle
+        for y in range(self.n):
             startx = endx = -1
             self.pairs.append(list())
-            for x in range(1, self.m+2):
-                if startx < 0 and self.matrix[y][x] == 1:
-                    startx = x - 1
-                if startx >= 0 and endx < 0 and self.matrix[y][x] == 0:
-                    endx = x - 2
+            for x in range(self.m):
+                if startx < 0 and self[y][x] == 1:
+                    startx = x
+                if startx >= 0 and endx < 0 and (self[y][x] == 0 or x == self.m - 1):
+                    if self[y][x] == 0:
+                        endx = x - 1
+                    else:
+                        endx = x
                     self.pairs[-1].append([startx, endx])
                     self.maxrect = max(self.maxrect, endx-startx)
                     startx = endx = -1
+
         if debug:
             for y in range(self.n):
                 print("row {} pairs = {}".format(y, self.pairs[y]))
@@ -108,11 +94,13 @@ class matrix(list):
         self.create_int_pairs(debug)
 
         maxrec = 0
+        j = self.n - 1
         for i in range(self.n - 1):
-            ints, maxint = self.find_intersects(self.pairs[i], self.intpairs[i+1])
-            maxrec = max(maxint * (self.n - i), maxrec)
-            if debug:
-                print("ints = {}, max rectangle = {}".format(ints, maxrec))
+            for j in range(self.n - 1, -1, -1):
+                ints, maxint = self.find_intersects(self.pairs[i], self.intpairs[j][i+1])
+                maxrec = max(maxint * (j - i + 1), maxrec)
+                if debug:
+                    print("ints = {}, max rectangle = {}".format(ints, maxrec))
 
         return maxrec
 
@@ -178,6 +166,22 @@ if __name__=="__main__":
            [1, 0, 1, 1, 1, 1, 1],
            [1, 1, 1, 1, 1, 1, 1],
            [1, 0, 1, 1, 1, 0, 1],
+           [1, 0, 1, 1, 1, 1, 0]]
+
+    mtx = matrix(mat)
+    maxrec = mtx.largest_rect(debug)
+    print("TEST#{} largest rectangle has {} cells".format(tno, maxrec))
+
+    tno += 1
+    debug = False
+    mat = [[0, 0, 1, 1, 0, 1, 1],
+           [0, 0, 1, 1, 0, 1, 1],
+           [0, 0, 1, 0, 1, 1, 1],
+           [1, 1, 1, 1, 1, 1, 1],
+           [1, 1, 0, 1, 0, 1, 1],
+           [1, 0, 1, 1, 1, 1, 1],
+           [1, 1, 1, 1, 1, 1, 1],
+           [1, 0, 1, 0, 1, 0, 1],
            [1, 0, 1, 1, 1, 1, 0]]
 
     mtx = matrix(mat)

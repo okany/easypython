@@ -80,7 +80,7 @@
 * test76 - prints the first non-repeated character from a string
 * test77 - finds the minimum number of cuts to create palindromes from a string
 * test78 - solves the word break problem which determines if a string consists of substrings all found in a dictionary
-* test79 - finds the size of the largest rectangle in a binary matrix in O(NxN) time complexity
+* test79 - finds the size of the largest rectangle in a binary matrix
 * test80 - inserts a new interval into a list of intervals which are non-overlapping and sorted based on start times
 * test81 - finds the minimum number of steps to convert string A into string B 
 * test82 - cuts a rod from the weak points of the rod in an order to minimize the rod cutting cost where cutting each rod costs the length of the rod
