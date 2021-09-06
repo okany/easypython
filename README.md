@@ -88,3 +88,4 @@
 * test84 - inserts a new interval into a list of intervals which are non-overlapping and sorted based on start times
 * test85 - deletes all nodes with duplicate numbers in a sorted linked list
 * test86 - merges two sorted linked lists
+* test87 - swaps all two adjacent nodes in a linked list and returns its head 
