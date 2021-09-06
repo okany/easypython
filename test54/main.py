@@ -1,4 +1,5 @@
-# This script finds Fibonacci numbers for a given positive integer
+# This script finds Fibonacci numbers for a given positive integer. It finds
+# Fibonacci number for 10^7 on a Mac with 32GB memory.
 #
 # This script is a part of the Easy Python project which creates a number
 # sample python scripts to answer simple programming questions. The
@@ -31,11 +32,15 @@ class fibo():
         if num in self.dict:
             res = self.dict[num]
         else:
-            fn_1 = self.find_fibo(num - 1)
             fn_2 = self.find_fibo(num - 2)
+            fn_1 = self.find_fibo(num - 1)
 
             res = fn_1 + fn_2
             self.dict[num] = res
+
+            if num - 3 in self.dict:
+                self.dict.pop(num-3)
+
         return res
 
 
@@ -55,6 +60,7 @@ if __name__ == "__main__":
     print("Fibonacci number for {} is {}".format(n, fb.find_fibo(n)))
     n = 17
     print("Fibonacci number for {} is {}".format(n, fb.find_fibo(n)))
+
     n = 1000
     print("Fibonacci number for {} is {}".format(n, fb.find_fibo(n)))
     n = 1500
@@ -105,10 +111,9 @@ if __name__ == "__main__":
     print("Fibonacci number for {} is {}".format(n, fb.find_fibo(n)))
 
     x = n = 0
-    for n in range(10000, 10**6+1, 500):
+    for n in range(12500, 10**7+1, 500):
         x = fb.find_fibo(n)
         if(n % 100000 == 0):
             print("Found Fibonacci number for {}".format(n))
 
     print("Fibonacci number for {} is {} ".format(n, x))
-
