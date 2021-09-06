@@ -12,7 +12,7 @@
 * test8 - finds the kth minimum number in a list
 * test9 - determines if two strings are anagram or not
 * test10 - implements bubble sort, insertion sort, quick sort, merge sort, and bucket sort algorithms
-* test11 - reverses a string by using recursion
+* test11 - reorders a linked list L1->L2->...->LN-1->LN into L1->LN->L2->LN-1->...
 * test12 - finds the median of an array which is created by merging two sorted arrays in O(log n+m)
 * test13 - implements a simple vending machine
 * test14 - removes duplicate entries in a list
@@ -90,3 +90,4 @@
 * test86 - merges two sorted linked lists
 * test87 - swaps all two adjacent nodes in a linked list and returns its head 
 * test88 - partitions a linked list such that all nodes with a value less than X come before all nodes with value greater than or equal to X
+* test89 - reverses a string by using recursion
