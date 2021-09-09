@@ -19,7 +19,7 @@
 * test15 - checks if 2 strings are rotation of each other
 * test16 - reverses words in a given sentence without using any library method
 * test17 - finds the nth node from the end in a singly linked list in one pass
-* test18 - creates a list with only unique items
+* test18 - finds the shortest sequence between two words start and end by changing single character each time and requiring all intermediary words in a word dictionary
 * test19 - finds all combinations of a string
 * test20 - checks if a string is a palindrome
 * test21 - reverses a singly linked list
@@ -94,3 +94,4 @@
 * test90 - returns elements of an NxM matrix in spiral order
 * test91 - sorts a linkled list by using insertion sort
 * test92 - finds subsets of a list of distinct integers and returns them in the non-descending order
+* test93 - creates a list with only unique items
