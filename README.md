@@ -93,3 +93,4 @@
 * test89 - reverses a string by using recursion
 * test90 - returns elements of an NxM matrix in spiral order
 * test91 - sorts a linkled list by using insertion sort
+* test92 - finds subsets of a list of distinct integers and returns them in the non-descending order
