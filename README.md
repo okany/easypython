@@ -95,3 +95,4 @@
 * test91 - sorts a linkled list by using insertion sort
 * test92 - finds subsets of a list of distinct integers and returns them in the non-descending order
 * test93 - creates a list with only unique items
+* test94 - approximates the Pi value by accumulating the distance among point increments on the upper right quartile of the circle 
