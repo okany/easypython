@@ -82,21 +82,21 @@ class nqueens():
         if(self.allsols == []):
             print("None")
         else:
-            for i in range(len(self.allsols)):
+            for i, sol in enumerate(self.allsols):
                 print("Solution #{} :".format(i+1))
-                print(self.allsols[i])
-                self.print_solution(self.allsols[i])
+                print(sol)
+                self.print_solution(sol)
 
     def print_solution(self, sol):
         for _ in range((self.num*3)+4):
             print(end='-')
         print ("")
-        for i in range(self.num):
+        for i, asol in enumerate(sol):
             print("{:2}".format("|"), end=' ')
-            for j in range(sol[i][1]):
+            for j in range(asol[1]):
                 print("{:2}".format("."), end=' ')
             print("{:2}".format("X"), end=' ')
-            for j in range(sol[i][1]+1, self.num):
+            for j in range(asol[1]+1, self.num):
                 print("{:2}".format("."), end=' ')
             print("{:2}".format("|"), end=' ')
             print("")
@@ -107,18 +107,18 @@ class nqueens():
     def print_board(self):
         if self.debug:
             print("-----------------------")
-            for i in range(self.num):
-                print(" row {}     = {}".format(i, self.board[i]))
-            for i in range(self.num):
-                print(" removed {} = {}".format(i, self.removed[i]))
+            for i, board in enumerate(self.board):
+                print(" row {}     = {}".format(i, board))
+            for i, removed in enumerate(self.removed):
+                print(" removed {} = {}".format(i, removed))
             print(" solution is {}".format(self.sol))
             print("-----------------------")
 
     def clone_board(self, board):
         clone  = list()
-        for i in range(self.num):
-            for j in range (self.num):
-                clone.append(board[i][j].copy())
+        for i, row in enumerate(board):
+            for j, cell in enumerate(row):
+                clone.append(cell.copy())
 
         return clone
 

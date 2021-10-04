@@ -32,9 +32,7 @@ class slist(list):
         while last > 0:
             for i in range(last):
                 if self.blist[i] > self.blist[i+1]:
-                    temp = self.blist[i]
-                    self.blist[i] = self.blist[i+1]
-                    self.blist[i+1] = temp
+                    self.blist[i], self.blist[i+1] = self.blist[i+1], self.blist[i]
             last = last - 1
         return self.blist
 
@@ -50,7 +48,7 @@ class slist(list):
                     mindex = i
             if(mindex != first):
                 self.ilist.pop(mindex)
-                self.ilist.insert(0,min)
+                self.ilist.insert(first,min)
             first = first + 1
 
         return self.ilist
@@ -67,15 +65,14 @@ class slist(list):
     def bucketsort(self, k):
         if(len(self)<=1): return self
         min, max = self.findminmax()
-        bucket = []
         bsize = int((max - min)/k)+1
-        for i in range(k):
-            bucket.append([])
+        bucket = [[] for i in range(k)]
         for each in self:
             bucket[int((each-min)/bsize)].append(each)
 
-        for i in range(k):
-            alist = slist(bucket[i])
+        for abuck in bucket:
+            alist = slist(abuck)
+            # print(f"bucket={abuck} alist={alist} sorted={alist.insertionsort()}")
             self.bclist.extend(alist.insertionsort())
 
         return self.bclist
@@ -165,3 +162,11 @@ if __name__ == '__main__':
     print("Merge sorted list     = ", mergesort(al4))
     print("Bucket sorted list    = ", al4.bucketsort(2))
 
+    al5 = slist([1, 2, 4, 12, -1, 5, 4])
+
+    print("\nOriginal list         = ", al5)
+    print("Bubble sorted list    = ", al5.bubblesort())
+    print("Insertion sorted list = ", al5.insertionsort())
+    print("Quick sorted list     = ", quicksort(al5))
+    print("Merge sorted list     = ", mergesort(al5))
+    print("Bucket sorted list    = ", al5.bucketsort(2))
