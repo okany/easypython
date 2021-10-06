@@ -27,10 +27,8 @@ class listcount(list):
 
     def createdict(self):
         for item in self:
-            if (self.adict.get(item) == None):
-                self.adict[item] = 1
-            else:
-                self.adict[item] = self.adict[item]+1
+            litem = item.lower()
+            self.adict[litem] = self.adict[litem] + 1 if litem in self.adict else 1
 
     def printcounts(self):
         print("WORD COUNT = {}".format(self.adict))

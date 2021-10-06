@@ -34,7 +34,7 @@ def find_middle(ll):
     else:
         node = ll
         index = 0
-        while node != None:
+        while node:
             lldict[index] = node
             node = node.next
             index = index + 1
@@ -52,7 +52,7 @@ class linkedlist():
     def tolist(self):
         alist = []
         item = self
-        while item != None:
+        while item:
             alist.append(item.data)
             item = item.next
 

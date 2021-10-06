@@ -28,31 +28,10 @@ class datalist(list):
         super().__init__(alist)
         self.klist = []
 
-    def readdata(self):
-        print("Please enter the data file name:")
-        for self.fname in sys.stdin:
-            break
-
-        try:
-            # open file
-            f = open(self.fname.rstrip())
-        except:
-            print("file open failed")
-            exit(1)
-
-        # read words
-        for num in f:
-            self.append(num)
-
     def printdata(self):
 
-        print("items in the list are ")
-        for item in self:
-            print(item)
-
-        print("items in the klist are")
-        for item in self.klist:
-            print(item)
+        print(f"items in the list are:  {self}")
+        print(f"items in the klist are: {self.klist}")
 
     def insertklist(self, newitem):
         # list is full?
@@ -79,25 +58,7 @@ class datalist(list):
             return self.klist[self.kvalue-1]
 
 
-def readk():
-    line = input("Please enter K value:")
-    try:
-        k = int(line)
-    except:
-        print("invalid K value entered")
-        exit(1)
-    else:
-        return k
-
-
 if __name__ == '__main__':
-
-    #kvalue = readk()
-    #print('k value is', kvalue)
-
-    #dl = datalist()
-    #dl.readdata()
-    #dl.printdata()
 
     dl1 = datalist(100, (1,9,7,8,2,3,5,5,3,3,2,1,43,35,5,45,0,213,12))
     print("TEST#1 - kmin=", dl1.findkmin())
@@ -105,9 +66,4 @@ if __name__ == '__main__':
     dl2 = datalist(5, (10,100,78,9,7,8,2,3,5,5,3,3,2,1,43,35,5,45,0,213,12))
     print("TEST#2 - kmin=", dl2.findkmin())
     dl2.printdata()
-
-    #kval = readk()
-
-    #print("K is =", kval)
-
 

@@ -25,13 +25,10 @@ class rotated_array(list):
         super().__init__(alist)
 
     def isrotated(self):
-        if len(self) < 2:
+        if len(self) < 2 or self[0] < self[-1]:
             return False
         else:
-            if self[0] < self[len(self)-1]:
-                return False
-            else:
-                return True
+            return True
 
     def find(self, anint):
 
