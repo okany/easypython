@@ -1,5 +1,5 @@
 # This script finds if the list A with sorted integers have 2 indices such that
-# A[i] - A[j] = k where k is a positive integer and i != j
+# A[i] - A[j] = k where k is a positive integer and i != j (space optimized)
 #
 # This script is a part of the Easy Python project which creates a number
 # sample python scripts to answer simple programming questions. The

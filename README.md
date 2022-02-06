@@ -61,7 +61,7 @@
 * test57 - finds a substring in a string
 * test58 - converts an integer N into a roman numeral where 1 < N < 4000
 * test59 - converts a JSON string into prettyJSON format
-* test60 - finds if the list A with sorted integers have 2 indices such that A[i] - A[j] = k where k is a positive integer and i != j
+* test60 - finds if the list A with sorted integers have 2 indices such that A[i] - A[j] = k where k is a positive integer and i != j (space optimized)
 * test61 - finds 3 numbers with a sum closest to a given integer T in a list of integers S
 * test62 - implements eval function for arithmetic operands *,/,+,-
 * test63 - finds all unique paths in a grid of MxN size between points (1,1) and (M,N)
@@ -97,3 +97,4 @@
 * test93 - creates a list with only unique items
 * test94 - approximates the Pi value by accumulating the distance among point increments on the upper right quartile of the circle 
 * test95 - finds the intersection of two linked lists in O(N) time and O(1) memory
+* test96 - finds if the list A with sorted integers have 2 indices such that A[i] - A[j] = k where k is a positive integer and i != j (time optimized)

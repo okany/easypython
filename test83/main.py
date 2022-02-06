@@ -28,22 +28,18 @@ class distribute_candy():
         self.slist = list()
 
     def get_min_candies(self):
+        self.slist = [each for each in self.plist if each not in self.pdict]
+
         for each in self.plist:
-            if self.pdict.get(each) == None:
-                # insert the person into the plist and slist
-                self.pdict[each] = 1
-                # create a unique priority list
-                self.slist.append(each)
-            else:
-                self.pdict[each] += 1
+            self.pdict[each] = self.pdict[each] + 1 if each in self.pdict else 1
 
         # sort unique priority list
         self.slist.sort()
         self.min_candies = 0
 
-        for index in range(len(self.slist)):
+        for index, item in enumerate(self.slist):
             # give one more cnady to the next group
-            self.min_candies += (index+1) * self.pdict[self.slist[index]]
+            self.min_candies += (index+1) * self.pdict[item]
 
         # return the minimum number of candies
         return(self.min_candies)
