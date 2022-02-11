@@ -24,18 +24,40 @@ class pstr(str):
         self = astr
 
     def ispalindrome(self):
-        for i in range(int(len(self)/2)):
-            if(self[i] != self[len(self)-i-1]):
+        for i in range(len(self)>>1):
+            if(self[i] != self[-i-1]):
                 return False
         return True
+
+    def ispalindrome2(self):
+        mid = (len(self) >> 1)
+        for i, char in enumerate(self):
+            if i >= mid:
+                return True
+            elif(char != self[-i-1]):
+                return False
+        return True
+
 
 if __name__ == "__main__":
 
     pstr1 = pstr("123454321")
     print("String {} is Palindrome = {}".format(pstr1, pstr1.ispalindrome()))
+    print("String {} is Palindrome = {}".format(pstr1, pstr1.ispalindrome2()))
+    print()
 
     pstr2 = pstr("123456654321")
     print("String {} is Palindrome = {}".format(pstr2, pstr2.ispalindrome()))
+    print("String {} is Palindrome = {}".format(pstr2, pstr2.ispalindrome2()))
+    print()
 
     pstr3 = pstr("123454354321")
     print("String {} is Palindrome = {}".format(pstr3, pstr3.ispalindrome()))
+    print("String {} is Palindrome = {}".format(pstr3, pstr3.ispalindrome2()))
+    print()
+
+    pstr4 = pstr("123456554321")
+    print("String {} is Palindrome = {}".format(pstr4, pstr4.ispalindrome()))
+    print("String {} is Palindrome = {}".format(pstr4, pstr4.ispalindrome2()))
+    print()
+
