@@ -55,13 +55,12 @@ class linkedlist():
         self.data = data
 
     def reverse(self):
-        if(self == None): re = None
-        elif(self.next == None):
-            rev = linkedlist(self.data)
+        if(self == None):
+            rev = None
         else:
             trv = self
-            prev = linkedlist(self.data)
-            while trv.next != None:
+            rev = prev = linkedlist(self.data)
+            while trv.next:
                 next = linkedlist(trv.next.data)
                 next.setnext(prev)
                 rev = prev = next
