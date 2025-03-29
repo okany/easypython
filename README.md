@@ -99,3 +99,6 @@
 * test95 - finds the intersection of two linked lists in O(N) time and O(1) memory
 * test96 - finds if the list A with sorted integers have 2 indices such that A[i] - A[j] = k where k is a positive integer and i != j (time optimized)
 * test97 - adds two non-negative numbers stored in two linked lists where digits are stored in reverse order and each node contains a single digit.
+* test98 - evaluates an expression in reverse polish notation
+* test99 - reverse a linked list
+* 
